@@ -78,6 +78,8 @@
 		BF1111110000000DBF111111 /* BackupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000DFF111111 /* BackupListView.swift */; };
 		BF1111110000000EBF111111 /* BackupSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000EFF111111 /* BackupSettingsView.swift */; };
 		BF1111110000000FBF111111 /* RestorePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000FFF111111 /* RestorePromptView.swift */; };
+		CC11111100000001CC111111 /* InstallTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000001DD111111 /* InstallTracker.swift */; };
+		CC11111100000002CC111111 /* InstallCountdownBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000002DD111111 /* InstallCountdownBanner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -153,6 +155,8 @@
 		FF1111110000000DFF111111 /* BackupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupListView.swift; sourceTree = "<group>"; };
 		FF1111110000000EFF111111 /* BackupSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSettingsView.swift; sourceTree = "<group>"; };
 		FF1111110000000FFF111111 /* RestorePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePromptView.swift; sourceTree = "<group>"; };
+		DD11111100000001DD111111 /* InstallTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallTracker.swift; sourceTree = "<group>"; };
+		DD11111100000002DD111111 /* InstallCountdownBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallCountdownBanner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +197,7 @@
 				FF11111100000005FF111111 /* BackupScheduler.swift */,
 				EA951FE4B751CAAEF62FCA92 /* DataExportService.swift */,
 				DB467A1B598BEB6F84F31457 /* DateHelper.swift */,
+				DD11111100000001DD111111 /* InstallTracker.swift */,
 				FF11111100000006FF111111 /* KeychainHelper.swift */,
 				07E6C653CAC13FCF7CD1F03D /* NotificationService.swift */,
 				FF11111100000007FF111111 /* TelegramBackupService.swift */,
@@ -250,6 +255,7 @@
 				2AFDA0E9B4182C3319C0173A /* ColorPickerRow.swift */,
 				268DC81323209FEA97A8AD6B /* DateRangePickerView.swift */,
 				B6CB8F1A4FE13DCAC2A932FF /* EmptyStateView.swift */,
+				DD11111100000002DD111111 /* InstallCountdownBanner.swift */,
 				2AD16157182FC803F92833A4 /* PriorityIndicator.swift */,
 				D9C4448D64CF39E3EB3C6967 /* StatusBadge.swift */,
 			);
@@ -544,6 +550,8 @@
 				BF1111110000000DBF111111 /* BackupListView.swift in Sources */,
 				BF1111110000000EBF111111 /* BackupSettingsView.swift in Sources */,
 				BF1111110000000FBF111111 /* RestorePromptView.swift in Sources */,
+				CC11111100000001CC111111 /* InstallTracker.swift in Sources */,
+				CC11111100000002CC111111 /* InstallCountdownBanner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

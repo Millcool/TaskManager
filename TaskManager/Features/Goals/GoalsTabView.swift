@@ -9,6 +9,10 @@ struct GoalsTabView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
+                InstallCountdownBanner()
+                    .padding(.horizontal, AppTheme.horizontalPadding)
+                    .padding(.top, 8)
+
                 // Period segment
                 Picker("Период", selection: Binding(
                     get: { viewModel.selectedPeriod },
@@ -20,7 +24,7 @@ struct GoalsTabView: View {
                 }
                 .pickerStyle(.segmented)
                 .padding(.horizontal, AppTheme.horizontalPadding)
-                .padding(.top, 8)
+                .padding(.top, 12)
 
                 // Period navigator
                 PeriodNavigatorView(
