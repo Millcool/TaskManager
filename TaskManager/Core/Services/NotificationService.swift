@@ -109,6 +109,52 @@ final class NotificationService {
         center.removePendingNotificationRequests(withIdentifiers: [identifier])
     }
 
+    // MARK: - PhD Application Start
+
+    private static let phdApplicationIdPrefix = "phd_app_start_"
+
+    func reschedulePhdApplicationStartNotifications(
+        programs: [PhdProgram],
+        store: PhdApplicationStore = .shared,
+        universityLookup: @escaping (PhdProgram) -> University? = { PhdProgramsDataProvider.university(for: $0) }
+    ) {
+        center.getPendingNotificationRequests { [center] requests in
+            let toRemove = requests
+                .map(\.identifier)
+                .filter { $0.hasPrefix(Self.phdApplicationIdPrefix) }
+            if !toRemove.isEmpty {
+                center.removePendingNotificationRequests(withIdentifiers: toRemove)
+            }
+
+            let now = Date()
+            for program in programs {
+                guard store.status(for: program.id) == .notApplied else { continue }
+                guard let start = PhdDateParser.date(from: program.applicationStartDate, reference: now) else { continue }
+                let triggerDate = Calendar.current.date(bySettingHour: 9, minute: 30, second: 0, of: start) ?? start
+                guard triggerDate > now else { continue }
+
+                let content = UNMutableNotificationContent()
+                let uniName = universityLookup(program)?.shortName ?? "вуз"
+                content.title = "Открыт приём документов"
+                content.body = "\(uniName): «\(program.name)». Приём до \(program.applicationEndDate)."
+                content.sound = .default
+
+                let components = Calendar.current.dateComponents(
+                    [.year, .month, .day, .hour, .minute],
+                    from: triggerDate
+                )
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+
+                let request = UNNotificationRequest(
+                    identifier: Self.phdApplicationIdPrefix + program.id.uuidString,
+                    content: content,
+                    trigger: trigger
+                )
+                center.add(request)
+            }
+        }
+    }
+
     // MARK: - Private
 
     private func scheduleRepeating(id: String, title: String, body: String, hour: Int, minute: Int, weekday: Int?) {

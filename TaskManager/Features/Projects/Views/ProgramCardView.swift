@@ -4,6 +4,11 @@ struct ProgramCardView: View {
     let program: PhdProgram
     let university: University?
 
+    @State private var store = PhdApplicationStore.shared
+
+    private var status: PhdApplicationStatus { store.status(for: program.id) }
+    private var urgency: PhdApplicationUrgency { PhdApplicationIndicator.urgency(for: program) }
+
     var body: some View {
         NavigationLink(destination: ProgramDetailView(program: program, university: university)) {
             VStack(alignment: .leading, spacing: 10) {
@@ -20,6 +25,7 @@ struct ProgramCardView: View {
                             .multilineTextAlignment(.leading)
                     }
                     Spacer()
+                    statusBadge
                     Image(systemName: "chevron.right")
                         .font(.caption)
                         .foregroundStyle(AppColors.neutral)
@@ -58,14 +64,66 @@ struct ProgramCardView: View {
                 }
             }
             .padding(12)
-            .background(AppColors.cardBackground.opacity(0.5))
+            .background(cardBackground)
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius))
             .overlay(
                 RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius)
-                    .stroke(AppColors.cardStroke, lineWidth: 1)
+                    .stroke(cardStroke, lineWidth: cardStrokeWidth)
             )
         }
         .buttonStyle(.plain)
+    }
+
+    @ViewBuilder
+    private var statusBadge: some View {
+        if status.isApplied {
+            HStack(spacing: 3) {
+                Image(systemName: "checkmark.seal.fill")
+                    .font(.caption2)
+                Text("Подано")
+                    .font(.caption2)
+                    .fontWeight(.semibold)
+            }
+            .foregroundStyle(AppColors.green)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 3)
+            .background(AppColors.green.opacity(0.16))
+            .clipShape(Capsule())
+        } else if urgency != .none, urgency != .closed, let color = urgency.highlightColor {
+            Text(urgency.label)
+                .font(.caption2)
+                .fontWeight(.semibold)
+                .foregroundStyle(color)
+                .padding(.horizontal, 6)
+                .padding(.vertical, 3)
+                .background(color.opacity(0.16))
+                .clipShape(Capsule())
+        }
+    }
+
+    private var cardBackground: Color {
+        if status.isApplied {
+            return AppColors.green.opacity(0.12)
+        }
+        if let color = urgency.highlightColor, urgency != .closed {
+            return color.opacity(urgency.backgroundOpacity)
+        }
+        return AppColors.cardBackground.opacity(0.5)
+    }
+
+    private var cardStroke: Color {
+        if status.isApplied { return AppColors.green }
+        if let color = urgency.highlightColor, urgency != .closed { return color }
+        return AppColors.cardStroke
+    }
+
+    private var cardStrokeWidth: CGFloat {
+        if status.isApplied { return 2 }
+        switch urgency {
+        case .urgent: return 2
+        case .soon: return 1.5
+        default: return 1
+        }
     }
 
     private func badge(icon: String, text: String, color: Color) -> some View {

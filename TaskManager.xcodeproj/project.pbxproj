@@ -81,6 +81,9 @@
 		CC11111100000001CC111111 /* InstallTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000001DD111111 /* InstallTracker.swift */; };
 		CC11111100000002CC111111 /* InstallCountdownBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000002DD111111 /* InstallCountdownBanner.swift */; };
 		CC11111100000003CC111111 /* ProgramsTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000003DD111111 /* ProgramsTableRowView.swift */; };
+		CC11111100000004CC111111 /* PhdApplicationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000004DD111111 /* PhdApplicationStatus.swift */; };
+		CC11111100000005CC111111 /* PhdApplicationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000005DD111111 /* PhdApplicationStore.swift */; };
+		CC11111100000006CC111111 /* PhdDateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000006DD111111 /* PhdDateParser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -159,6 +162,9 @@
 		DD11111100000001DD111111 /* InstallTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallTracker.swift; sourceTree = "<group>"; };
 		DD11111100000002DD111111 /* InstallCountdownBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallCountdownBanner.swift; sourceTree = "<group>"; };
 		DD11111100000003DD111111 /* ProgramsTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsTableRowView.swift; sourceTree = "<group>"; };
+		DD11111100000004DD111111 /* PhdApplicationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdApplicationStatus.swift; sourceTree = "<group>"; };
+		DD11111100000005DD111111 /* PhdApplicationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdApplicationStore.swift; sourceTree = "<group>"; };
+		DD11111100000006DD111111 /* PhdDateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdDateParser.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +208,8 @@
 				DD11111100000001DD111111 /* InstallTracker.swift */,
 				FF11111100000006FF111111 /* KeychainHelper.swift */,
 				07E6C653CAC13FCF7CD1F03D /* NotificationService.swift */,
+				DD11111100000005DD111111 /* PhdApplicationStore.swift */,
+				DD11111100000006DD111111 /* PhdDateParser.swift */,
 				FF11111100000007FF111111 /* TelegramBackupService.swift */,
 			);
 			path = Services;
@@ -365,6 +373,7 @@
 				C0000003C0000003C0000003 /* StudentReview.swift */,
 				C0000004C0000004C0000004 /* PhdProgram.swift */,
 				C0000005C0000005C0000005 /* PhdProgramsDataProvider.swift */,
+				DD11111100000004DD111111 /* PhdApplicationStatus.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -556,6 +565,9 @@
 				CC11111100000001CC111111 /* InstallTracker.swift in Sources */,
 				CC11111100000002CC111111 /* InstallCountdownBanner.swift in Sources */,
 				CC11111100000003CC111111 /* ProgramsTableRowView.swift in Sources */,
+				CC11111100000004CC111111 /* PhdApplicationStatus.swift in Sources */,
+				CC11111100000005CC111111 /* PhdApplicationStore.swift in Sources */,
+				CC11111100000006CC111111 /* PhdDateParser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
