@@ -1260,6 +1260,146 @@ enum PhdProgramsDataProvider {
         ),
     ]
 
+    // MARK: - Program links (program page / application / curriculum)
+
+    private static let programLinks: [UUID: PhdProgramLinks] = {
+        func uuid(_ s: String) -> UUID { UUID(uuidString: s)! }
+        return [
+            // МГУ — ВМК / мехмат
+            uuid("B0000001-0000-0000-0000-000000000001"): PhdProgramLinks(
+                programPageURL: "https://cs.msu.ru/education/aspirantura",
+                applicationPortalURL: "https://www.msu.ru/entrance/postgraduate/"
+            ),
+            uuid("B0000001-0001-0000-0000-000000000001"): PhdProgramLinks(
+                programPageURL: "https://cs.msu.ru/education/aspirantura",
+                applicationPortalURL: "https://www.msu.ru/entrance/postgraduate/"
+            ),
+            uuid("B0000001-0002-0000-0000-000000000001"): PhdProgramLinks(
+                programPageURL: "https://www.math.msu.ru/postgraduate",
+                applicationPortalURL: "https://www.msu.ru/entrance/postgraduate/"
+            ),
+
+            // НИУ ВШЭ — ФКН (учебные планы набора 2025)
+            uuid("B0000002-0000-0000-0000-000000000002"): PhdProgramLinks(
+                programPageURL: "https://aspirantura.hse.ru/cs/general",
+                applicationPortalURL: "https://enrol.hse.ru/phd/",
+                curriculumURL: "https://www.hse.ru/mirror/pubs/share/1099634967.pdf"
+            ),
+            uuid("B0000002-0001-0000-0000-000000000002"): PhdProgramLinks(
+                programPageURL: "https://aspirantura.hse.ru/cs/general",
+                applicationPortalURL: "https://enrol.hse.ru/phd/",
+                curriculumURL: "https://www.hse.ru/mirror/pubs/share/1099634967.pdf"
+            ),
+            uuid("B0000002-0002-0000-0000-000000000002"): PhdProgramLinks(
+                programPageURL: "https://aspirantura.hse.ru/cs/general",
+                applicationPortalURL: "https://enrol.hse.ru/phd/",
+                curriculumURL: "https://www.hse.ru/mirror/pubs/share/1099634967.pdf"
+            ),
+            uuid("B0000002-0003-0000-0000-000000000002"): PhdProgramLinks(
+                programPageURL: "https://aspirantura.hse.ru/cs/mprogramm2023",
+                applicationPortalURL: "https://enrol.hse.ru/phd/",
+                curriculumURL: "https://aspirantura.hse.ru/data/2025/11/06/136125223/%D0%9C_%D0%9C%D0%B0%D1%82%20%D0%B8%20%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%BD%D0%BE%D0%B5%20%D0%BE%D0%B1%D0%B5%D1%81%D0%BF%D0%B5%D1%87%D0%B5%D0%BD%D0%B8%D0%B5%20%D0%92%D0%A1_2025.pdf"
+            ),
+            uuid("B0000002-0004-0000-0000-000000000002"): PhdProgramLinks(
+                programPageURL: "https://aspirantura.hse.ru/cs/general",
+                applicationPortalURL: "https://enrol.hse.ru/phd/",
+                curriculumURL: "https://www.hse.ru/mirror/pubs/share/1099634967.pdf"
+            ),
+
+            // МФТИ
+            uuid("B0000005-0000-0000-0000-000000000005"): PhdProgramLinks(
+                programPageURL: "https://mipt.ru/education/post-graduate/",
+                applicationPortalURL: "https://pk.mipt.ru/phd/"
+            ),
+            uuid("B0000005-0001-0000-0000-000000000005"): PhdProgramLinks(
+                programPageURL: "https://mipt.ru/education/post-graduate/",
+                applicationPortalURL: "https://pk.mipt.ru/phd/"
+            ),
+            uuid("B0000005-0002-0000-0000-000000000005"): PhdProgramLinks(
+                programPageURL: "https://mipt.ru/education/post-graduate/",
+                applicationPortalURL: "https://pk.mipt.ru/phd/"
+            ),
+            uuid("B0000005-0003-0000-0000-000000000005"): PhdProgramLinks(
+                programPageURL: "https://mipt.ru/education/post-graduate/",
+                applicationPortalURL: "https://pk.mipt.ru/phd/"
+            ),
+            uuid("B0000005-0004-0000-0000-000000000005"): PhdProgramLinks(
+                programPageURL: "https://mipt.ru/education/post-graduate/",
+                applicationPortalURL: "https://pk.mipt.ru/phd/"
+            ),
+            uuid("B0000005-0005-0000-0000-000000000005"): PhdProgramLinks(
+                programPageURL: "https://mipt.ru/education/post-graduate/",
+                applicationPortalURL: "https://pk.mipt.ru/phd/"
+            ),
+
+            // НИЯУ МИФИ
+            uuid("B000000B-0000-0000-0000-00000000000B"): PhdProgramLinks(
+                programPageURL: "https://admission.mephi.ru/postgraduate/education/programs",
+                applicationPortalURL: "https://admission.mephi.ru/postgraduate/"
+            ),
+            uuid("B000000B-0001-0000-0000-00000000000B"): PhdProgramLinks(
+                programPageURL: "https://admission.mephi.ru/postgraduate/education/programs",
+                applicationPortalURL: "https://admission.mephi.ru/postgraduate/"
+            ),
+            uuid("B000000B-0002-0000-0000-00000000000B"): PhdProgramLinks(
+                programPageURL: "https://admission.mephi.ru/postgraduate/education/programs",
+                applicationPortalURL: "https://admission.mephi.ru/postgraduate/"
+            ),
+            uuid("B000000B-0003-0000-0000-00000000000B"): PhdProgramLinks(
+                programPageURL: "https://admission.mephi.ru/postgraduate/education/programs",
+                applicationPortalURL: "https://admission.mephi.ru/postgraduate/"
+            ),
+
+            // МГТУ им. Баумана
+            uuid("B0000007-0000-0000-0000-000000000007"): PhdProgramLinks(
+                programPageURL: "https://bmstu.ru/aspirantura",
+                applicationPortalURL: "https://bmstu.ru/aspirantura/priem"
+            ),
+            uuid("B0000007-0001-0000-0000-000000000007"): PhdProgramLinks(
+                programPageURL: "https://bmstu.ru/aspirantura",
+                applicationPortalURL: "https://bmstu.ru/aspirantura/priem"
+            ),
+            uuid("B0000007-0002-0000-0000-000000000007"): PhdProgramLinks(
+                programPageURL: "https://bmstu.ru/aspirantura",
+                applicationPortalURL: "https://bmstu.ru/aspirantura/priem"
+            ),
+
+            // Сколтех
+            uuid("B000000B-5C00-0000-0000-00000000000B"): PhdProgramLinks(
+                programPageURL: "https://www.skoltech.ru/en/education/phd-program/",
+                applicationPortalURL: "https://apply.skoltech.ru/"
+            ),
+
+            // СПбГУ
+            uuid("B0000004-0000-0000-0000-000000000004"): PhdProgramLinks(
+                programPageURL: "https://abiturient.spbu.ru/programs/aspirantura/",
+                applicationPortalURL: "https://cabinet.spbu.ru/"
+            ),
+            uuid("B0000004-0001-0000-0000-000000000004"): PhdProgramLinks(
+                programPageURL: "https://abiturient.spbu.ru/programs/aspirantura/",
+                applicationPortalURL: "https://cabinet.spbu.ru/"
+            ),
+            uuid("B0000004-0002-0000-0000-000000000004"): PhdProgramLinks(
+                programPageURL: "https://abiturient.spbu.ru/programs/aspirantura/",
+                applicationPortalURL: "https://cabinet.spbu.ru/"
+            ),
+            uuid("B0000004-0003-0000-0000-000000000004"): PhdProgramLinks(
+                programPageURL: "https://abiturient.spbu.ru/programs/aspirantura/",
+                applicationPortalURL: "https://cabinet.spbu.ru/"
+            ),
+
+            // ИТМО
+            uuid("B0000006-0000-0000-0000-000000000006"): PhdProgramLinks(
+                programPageURL: "https://abit.itmo.ru/phd",
+                applicationPortalURL: "https://de.itmo.ru/abit/phd/"
+            ),
+            uuid("B0000006-0001-0000-0000-000000000006"): PhdProgramLinks(
+                programPageURL: "https://abit.itmo.ru/phd",
+                applicationPortalURL: "https://de.itmo.ru/abit/phd/"
+            ),
+        ]
+    }()
+
     // MARK: - Helpers
 
     static func programs(for university: University) -> [PhdProgram] {
@@ -1268,6 +1408,24 @@ enum PhdProgramsDataProvider {
 
     static func university(for program: PhdProgram) -> University? {
         universities.first { $0.id == program.universityId }
+    }
+
+    static func links(for program: PhdProgram) -> PhdProgramLinks? {
+        programLinks[program.id]
+    }
+
+    static func resolvedProgramPageURL(for program: PhdProgram) -> String? {
+        if let url = programLinks[program.id]?.programPageURL { return url }
+        return university(for: program)?.websiteURL
+    }
+
+    static func resolvedApplicationPortalURL(for program: PhdProgram) -> String? {
+        if let url = programLinks[program.id]?.applicationPortalURL { return url }
+        return university(for: program)?.websiteURL
+    }
+
+    static func curriculumURL(for program: PhdProgram) -> String? {
+        programLinks[program.id]?.curriculumURL
     }
 }
 // swiftlint:enable type_body_length file_length

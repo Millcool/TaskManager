@@ -84,6 +84,8 @@
 		CC11111100000004CC111111 /* PhdApplicationStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000004DD111111 /* PhdApplicationStatus.swift */; };
 		CC11111100000005CC111111 /* PhdApplicationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000005DD111111 /* PhdApplicationStore.swift */; };
 		CC11111100000006CC111111 /* PhdDateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000006DD111111 /* PhdDateParser.swift */; };
+		CC11111100000007CC111111 /* PhdProgramLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000007DD111111 /* PhdProgramLinks.swift */; };
+		CC11111100000008CC111111 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000008DD111111 /* SafariView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -165,6 +167,8 @@
 		DD11111100000004DD111111 /* PhdApplicationStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdApplicationStatus.swift; sourceTree = "<group>"; };
 		DD11111100000005DD111111 /* PhdApplicationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdApplicationStore.swift; sourceTree = "<group>"; };
 		DD11111100000006DD111111 /* PhdDateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdDateParser.swift; sourceTree = "<group>"; };
+		DD11111100000007DD111111 /* PhdProgramLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdProgramLinks.swift; sourceTree = "<group>"; };
+		DD11111100000008DD111111 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +271,7 @@
 				B6CB8F1A4FE13DCAC2A932FF /* EmptyStateView.swift */,
 				DD11111100000002DD111111 /* InstallCountdownBanner.swift */,
 				2AD16157182FC803F92833A4 /* PriorityIndicator.swift */,
+				DD11111100000008DD111111 /* SafariView.swift */,
 				D9C4448D64CF39E3EB3C6967 /* StatusBadge.swift */,
 			);
 			path = Components;
@@ -374,6 +379,7 @@
 				C0000004C0000004C0000004 /* PhdProgram.swift */,
 				C0000005C0000005C0000005 /* PhdProgramsDataProvider.swift */,
 				DD11111100000004DD111111 /* PhdApplicationStatus.swift */,
+				DD11111100000007DD111111 /* PhdProgramLinks.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -568,6 +574,8 @@
 				CC11111100000004CC111111 /* PhdApplicationStatus.swift in Sources */,
 				CC11111100000005CC111111 /* PhdApplicationStore.swift in Sources */,
 				CC11111100000006CC111111 /* PhdDateParser.swift in Sources */,
+				CC11111100000007CC111111 /* PhdProgramLinks.swift in Sources */,
+				CC11111100000008CC111111 /* SafariView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
