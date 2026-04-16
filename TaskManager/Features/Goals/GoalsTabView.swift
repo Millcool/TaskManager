@@ -97,6 +97,13 @@ struct GoalsTabView: View {
                                     Divider()
 
                                     Button {
+                                        viewModel.moveToPreviousPeriod(goal)
+                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                    } label: {
+                                        Label("На предыдущий период", systemImage: "arrow.left.to.line")
+                                    }
+
+                                    Button {
                                         viewModel.moveToNextPeriod(goal)
                                         UIImpactFeedbackGenerator(style: .medium).impactOccurred()
                                     } label: {
@@ -138,6 +145,14 @@ struct GoalsTabView: View {
                                         )
                                     }
                                     .tint(goal.status == .completed ? AppColors.neutral : AppColors.green)
+
+                                    Button {
+                                        viewModel.moveToPreviousPeriod(goal)
+                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                                    } label: {
+                                        Label("Назад", systemImage: "arrow.left")
+                                    }
+                                    .tint(AppColors.accent)
                                 }
                             }
                         }
