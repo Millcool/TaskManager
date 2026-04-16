@@ -80,6 +80,7 @@
 		BF1111110000000FBF111111 /* RestorePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000FFF111111 /* RestorePromptView.swift */; };
 		CC11111100000001CC111111 /* InstallTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000001DD111111 /* InstallTracker.swift */; };
 		CC11111100000002CC111111 /* InstallCountdownBanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000002DD111111 /* InstallCountdownBanner.swift */; };
+		CC11111100000003CC111111 /* ProgramsTableRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000003DD111111 /* ProgramsTableRowView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -157,6 +158,7 @@
 		FF1111110000000FFF111111 /* RestorePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePromptView.swift; sourceTree = "<group>"; };
 		DD11111100000001DD111111 /* InstallTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallTracker.swift; sourceTree = "<group>"; };
 		DD11111100000002DD111111 /* InstallCountdownBanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallCountdownBanner.swift; sourceTree = "<group>"; };
+		DD11111100000003DD111111 /* ProgramsTableRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramsTableRowView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -376,6 +378,7 @@
 				C000000AC000000AC000000A /* ProgramCardView.swift */,
 				C000000BC000000BC000000B /* UniversitySectionView.swift */,
 				C000000CC000000CC000000C /* PhdProgramsListView.swift */,
+				DD11111100000003DD111111 /* ProgramsTableRowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -552,6 +555,7 @@
 				BF1111110000000FBF111111 /* RestorePromptView.swift in Sources */,
 				CC11111100000001CC111111 /* InstallTracker.swift in Sources */,
 				CC11111100000002CC111111 /* InstallCountdownBanner.swift in Sources */,
+				CC11111100000003CC111111 /* ProgramsTableRowView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

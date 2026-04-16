@@ -17,32 +17,39 @@ struct PhdProgramsListView: View {
                     .padding(.horizontal, AppTheme.horizontalPadding)
                 }
 
+                // View mode switcher
+                Picker("Режим просмотра", selection: Binding(
+                    get: { viewModel.viewMode },
+                    set: { viewModel.setViewMode($0) }
+                )) {
+                    ForEach(PhdViewMode.allCases) { mode in
+                        Label(mode.title, systemImage: mode.systemImage).tag(mode)
+                    }
+                }
+                .pickerStyle(.segmented)
+                .padding(.horizontal, AppTheme.horizontalPadding)
+
                 // Stats summary
                 HStack(spacing: 12) {
                     summaryItem(value: "\(viewModel.filteredUniversities.count)", label: "вузов")
                     summaryItem(
-                        value: "\(viewModel.filteredUniversities.reduce(0) { $0 + viewModel.programs(for: $1).count })",
+                        value: "\(viewModel.filteredPrograms.count)",
                         label: "программ"
                     )
                     summaryItem(
-                        value: "\(viewModel.filteredUniversities.reduce(0) { $0 + viewModel.programs(for: $1).reduce(0) { $0 + $1.budgetPlaces } })",
+                        value: "\(viewModel.filteredPrograms.reduce(0) { $0 + $1.budgetPlaces })",
                         label: "бюдж. мест"
                     )
                 }
                 .padding(.horizontal, AppTheme.horizontalPadding)
 
-                // Universities list
-                LazyVStack(spacing: AppTheme.verticalSpacing) {
-                    ForEach(viewModel.filteredUniversities) { university in
-                        UniversitySectionView(
-                            university: university,
-                            programs: viewModel.programs(for: university),
-                            isExpanded: viewModel.isExpanded(university.id),
-                            onToggle: { viewModel.toggleUniversity(university.id) }
-                        )
-                    }
+                // Content
+                switch viewModel.viewMode {
+                case .grouped:
+                    groupedContent
+                case .table:
+                    tableContent
                 }
-                .padding(.horizontal, AppTheme.horizontalPadding)
 
                 if viewModel.filteredUniversities.isEmpty {
                     VStack(spacing: 12) {
@@ -75,6 +82,37 @@ struct PhdProgramsListView: View {
         .navigationTitle("Аспирантура")
         .navigationBarTitleDisplayMode(.large)
         .searchable(text: $viewModel.searchText, prompt: "Поиск университета или программы")
+    }
+
+    private var groupedContent: some View {
+        LazyVStack(spacing: AppTheme.verticalSpacing) {
+            ForEach(viewModel.filteredUniversities) { university in
+                UniversitySectionView(
+                    university: university,
+                    programs: viewModel.programs(for: university),
+                    isExpanded: viewModel.isExpanded(university.id),
+                    onToggle: { viewModel.toggleUniversity(university.id) }
+                )
+            }
+        }
+        .padding(.horizontal, AppTheme.horizontalPadding)
+    }
+
+    private var tableContent: some View {
+        ScrollView(.horizontal, showsIndicators: true) {
+            VStack(alignment: .leading, spacing: 6) {
+                ProgramsTableHeaderView()
+                LazyVStack(spacing: 6) {
+                    ForEach(viewModel.filteredPrograms) { program in
+                        ProgramsTableRowView(
+                            program: program,
+                            university: viewModel.university(for: program)
+                        )
+                    }
+                }
+            }
+            .padding(.horizontal, AppTheme.horizontalPadding)
+        }
     }
 
     private func cityChip(title: String, city: String?) -> some View {
