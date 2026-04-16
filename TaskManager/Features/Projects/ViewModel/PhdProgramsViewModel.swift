@@ -1,10 +1,32 @@
 import Foundation
 
+enum PhdViewMode: String, CaseIterable, Identifiable {
+    case grouped
+    case table
+
+    var id: String { rawValue }
+
+    var title: String {
+        switch self {
+        case .grouped: return "По вузам"
+        case .table: return "Таблицей"
+        }
+    }
+
+    var systemImage: String {
+        switch self {
+        case .grouped: return "square.stack.3d.up.fill"
+        case .table: return "tablecells.fill"
+        }
+    }
+}
+
 @Observable
 final class PhdProgramsViewModel {
     var searchText: String = ""
     var selectedCity: String? = nil
     var expandedUniversityIds: Set<UUID> = []
+    var viewMode: PhdViewMode = .grouped
 
     let universities = PhdProgramsDataProvider.universities
     let allPrograms = PhdProgramsDataProvider.programs
@@ -37,6 +59,33 @@ final class PhdProgramsViewModel {
 
     func programs(for university: University) -> [PhdProgram] {
         PhdProgramsDataProvider.programs(for: university)
+    }
+
+    var filteredPrograms: [PhdProgram] {
+        let universityIds = Set(filteredUniversities.map(\.id))
+        let query = searchText.lowercased()
+        return allPrograms.filter { program in
+            guard universityIds.contains(program.universityId) else { return false }
+            if query.isEmpty { return true }
+            let university = PhdProgramsDataProvider.university(for: program)
+            let universityMatch = university.map {
+                $0.name.lowercased().contains(query)
+                    || $0.shortName.lowercased().contains(query)
+                    || $0.city.lowercased().contains(query)
+            } ?? false
+            return universityMatch
+                || program.name.lowercased().contains(query)
+                || program.code.lowercased().contains(query)
+                || program.fieldOfStudy.lowercased().contains(query)
+        }
+    }
+
+    func university(for program: PhdProgram) -> University? {
+        PhdProgramsDataProvider.university(for: program)
+    }
+
+    func setViewMode(_ mode: PhdViewMode) {
+        viewMode = mode
     }
 
     func toggleUniversity(_ id: UUID) {

@@ -30,6 +30,10 @@ enum PhdProgramsDataProvider {
     private static let spbgutId = UUID(uuidString: "A0000017-0000-0000-0000-000000000017")!
     private static let spbgmtuId = UUID(uuidString: "A0000018-0000-0000-0000-000000000018")!
 
+    // MARK: - University IDs — Московская область
+
+    private static let rgutisId = UUID(uuidString: "A0000019-0000-0000-0000-000000000019")!
+
     // MARK: - Universities
 
     static let universities: [University] = [
@@ -57,6 +61,9 @@ enum PhdProgramsDataProvider {
         University(id: guapId, name: "Санкт-Петербургский государственный университет аэрокосмического приборостроения", shortName: "ГУАП", city: "Санкт-Петербург", logoSystemImage: "airplane.circle", websiteURL: "https://priem.guap.ru/asp"),
         University(id: spbgutId, name: "Санкт-Петербургский государственный университет телекоммуникаций им. проф. М.А. Бонч-Бруевича", shortName: "СПбГУТ", city: "Санкт-Петербург", logoSystemImage: "antenna.radiowaves.left.and.right", websiteURL: "https://priem.sut.ru/asp"),
         University(id: spbgmtuId, name: "Санкт-Петербургский государственный морской технический университет", shortName: "СПбГМТУ", city: "Санкт-Петербург", logoSystemImage: "ferry.fill", websiteURL: "https://www.smtu.ru"),
+
+        // Московская область
+        University(id: rgutisId, name: "Российский государственный университет туризма и сервиса", shortName: "РГУТиС", city: "Московская область", logoSystemImage: "suitcase.fill", websiteURL: "https://rguts.ru"),
     ]
 
     // MARK: - Programs
@@ -1206,6 +1213,50 @@ enum PhdProgramsDataProvider {
             reviews: [],
             lastYearApplicants: nil, lastYearEnrolled: nil,
             programDescription: "Аспирантура СПбГМТУ по искусственному интеллекту."
+        ),
+
+        // MARK: — РГУТиС
+
+        PhdProgram(
+            id: UUID(uuidString: "B0000019-0000-0000-0000-000000000019")!,
+            universityId: rgutisId,
+            name: "Региональная и отраслевая экономика",
+            code: "5.2.3",
+            fieldOfStudy: "Экономика (ВШБ, менеджмента и права)",
+            totalPlaces: 25, budgetPlaces: 0, paidPlaces: 25,
+            tuitionPerYear: 285_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "20 июня", applicationEndDate: "10 сентября",
+            examPeriod: "сентябрь",
+            portfolioRequired: true, portfolioDetails: "Реферат по научной специальности, список научных публикаций, рекомендация научного руководителя",
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .written, details: "Региональная и отраслевая экономика", maxScore: 100),
+                EntranceExam(id: UUID(), name: "Иностранный язык", type: .written, details: "Английский язык", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Программа ВШ бизнеса, менеджмента и права РГУТиС по специальности 5.2.3 (ранее 38.06.01). Поступление только на платные места. Данные за 2026 год — уточняйте на rguts.ru, результаты 2025 года и статистика по конкурсу публикуются в разделе приёмной комиссии."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B0000019-0001-0000-0000-000000000019")!,
+            universityId: rgutisId,
+            name: "Менеджмент",
+            code: "5.2.6",
+            fieldOfStudy: "Экономика (ВШБ, менеджмента и права)",
+            totalPlaces: 15, budgetPlaces: 0, paidPlaces: 15,
+            tuitionPerYear: 285_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "20 июня", applicationEndDate: "10 сентября",
+            examPeriod: "сентябрь",
+            portfolioRequired: true, portfolioDetails: "Реферат, публикации, рекомендация",
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .written, details: "Менеджмент", maxScore: 100),
+                EntranceExam(id: UUID(), name: "Иностранный язык", type: .written, details: "Английский язык", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Программа ВШ бизнеса РГУТиС по научной специальности 5.2.6 Менеджмент. Ориентация на менеджмент в сфере туризма, гостеприимства и сервиса. Данные по местам и стоимости за 2026 год — справочные, уточняйте на rguts.ru."
         ),
     ]
 
