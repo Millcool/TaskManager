@@ -4,11 +4,17 @@ struct ProgramsTableRowView: View {
     let program: PhdProgram
     let university: University?
 
+    @State private var store = PhdApplicationStore.shared
+
     private let columnSpacing: CGFloat = 14
+
+    private var status: PhdApplicationStatus { store.status(for: program.id) }
+    private var urgency: PhdApplicationUrgency { PhdApplicationIndicator.urgency(for: program) }
 
     var body: some View {
         NavigationLink(destination: ProgramDetailView(program: program, university: university)) {
             HStack(alignment: .top, spacing: columnSpacing) {
+                statusStripe
                 cell(width: 160, alignment: .leading) {
                     VStack(alignment: .leading, spacing: 2) {
                         Text(university?.shortName ?? "—")
@@ -115,14 +121,51 @@ struct ProgramsTableRowView: View {
             }
             .padding(.vertical, 10)
             .padding(.horizontal, 12)
-            .background(AppColors.cardBackground)
+            .background(rowBackground)
             .overlay(
                 RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius)
-                    .stroke(AppColors.cardStroke, lineWidth: 1)
+                    .stroke(rowStroke, lineWidth: rowStrokeWidth)
             )
             .clipShape(RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius))
         }
         .buttonStyle(.plain)
+    }
+
+    private var statusStripe: some View {
+        RoundedRectangle(cornerRadius: 2)
+            .fill(stripeColor)
+            .frame(width: 4)
+    }
+
+    private var stripeColor: Color {
+        if status.isApplied { return AppColors.green }
+        if let color = urgency.highlightColor, urgency != .closed { return color }
+        return Color.clear
+    }
+
+    private var rowBackground: Color {
+        if status.isApplied {
+            return AppColors.green.opacity(0.10)
+        }
+        if let color = urgency.highlightColor, urgency != .closed {
+            return color.opacity(urgency.backgroundOpacity)
+        }
+        return AppColors.cardBackground
+    }
+
+    private var rowStroke: Color {
+        if status.isApplied { return AppColors.green }
+        if let color = urgency.highlightColor, urgency != .closed { return color }
+        return AppColors.cardStroke
+    }
+
+    private var rowStrokeWidth: CGFloat {
+        if status.isApplied { return 2 }
+        switch urgency {
+        case .urgent: return 2
+        case .soon: return 1.5
+        default: return 1
+        }
     }
 
     private func cell<Content: View>(

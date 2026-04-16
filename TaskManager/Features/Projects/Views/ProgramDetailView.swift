@@ -4,9 +4,18 @@ struct ProgramDetailView: View {
     let program: PhdProgram
     let university: University?
 
+    @State private var store = PhdApplicationStore.shared
+    @State private var now: Date = Date()
+    private let tick = Timer.publish(every: 3600, on: .main, in: .common).autoconnect()
+
+    private var status: PhdApplicationStatus { store.status(for: program.id) }
+    private var urgency: PhdApplicationUrgency { PhdApplicationIndicator.urgency(for: program, now: now) }
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: 20) {
+                applicationStatusCard
+
                 // University info
                 if let uni = university {
                     HStack(spacing: 12) {
@@ -207,6 +216,80 @@ struct ProgramDetailView: View {
         .background(AppColors.background)
         .navigationTitle(program.name)
         .navigationBarTitleDisplayMode(.large)
+        .onReceive(tick) { now = $0 }
+    }
+
+    // MARK: - Application status card
+
+    private var applicationStatusCard: some View {
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(spacing: 10) {
+                Image(systemName: status.isApplied ? "checkmark.seal.fill" : "square.and.pencil")
+                    .font(.title3)
+                    .foregroundStyle(status.isApplied ? AppColors.green : AppColors.accent)
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(status.isApplied ? "Документы поданы" : "Документы не поданы")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(AppColors.textPrimary)
+                    if !status.isApplied, let highlight = urgency.highlightColor {
+                        Text(urgency.label)
+                            .font(.caption)
+                            .foregroundStyle(highlight)
+                    } else if status.isApplied {
+                        Text("Отметка снимется, если нажмёте ещё раз")
+                            .font(.caption)
+                            .foregroundStyle(AppColors.textSecondary)
+                    }
+                }
+                Spacer()
+            }
+
+            Button {
+                store.toggle(program.id)
+                NotificationService.shared.reschedulePhdApplicationStartNotifications(
+                    programs: PhdProgramsDataProvider.programs
+                )
+            } label: {
+                Text(status.isApplied ? "Снять отметку" : "Я подал документы")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(status.isApplied ? AppColors.textPrimary : .white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 10)
+                    .background(
+                        status.isApplied
+                            ? AppColors.cardBackground
+                            : (urgency.highlightColor ?? AppColors.accent)
+                    )
+                    .clipShape(RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius)
+                            .stroke(AppColors.cardStroke, lineWidth: status.isApplied ? 1 : 0)
+                    )
+            }
+            .buttonStyle(.plain)
+        }
+        .cardStyle()
+        .overlay(
+            RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius)
+                .stroke(applicationCardStrokeColor, lineWidth: applicationCardStrokeWidth)
+        )
+    }
+
+    private var applicationCardStrokeColor: Color {
+        if status.isApplied { return AppColors.green }
+        return urgency.highlightColor ?? Color.clear
+    }
+
+    private var applicationCardStrokeWidth: CGFloat {
+        if status.isApplied { return 2 }
+        switch urgency {
+        case .urgent: return 2
+        case .soon: return 1.5
+        case .upcoming: return 1
+        default: return 0
+        }
     }
 
     // MARK: - Helpers

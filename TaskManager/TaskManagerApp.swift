@@ -23,6 +23,9 @@ struct TaskManagerApp: App {
 
         BackupScheduler.register(modelContainer: container)
         InstallTracker.scheduleExpirationNotification()
+        NotificationService.shared.reschedulePhdApplicationStartNotifications(
+            programs: PhdProgramsDataProvider.programs
+        )
     }
 
     private var colorScheme: ColorScheme? {
