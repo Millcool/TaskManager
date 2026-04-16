@@ -34,6 +34,15 @@ struct SettingsTabView: View {
                         )
                     }
 
+                    // Backup section
+                    NavigationLink(destination: BackupSettingsView()) {
+                        settingsRow(
+                            icon: "icloud.and.arrow.up.fill",
+                            title: "Бэкапы",
+                            subtitle: "iCloud, Telegram, автосохранение"
+                        )
+                    }
+
                     // Data section
                     NavigationLink(destination: DataManagementView()) {
                         settingsRow(

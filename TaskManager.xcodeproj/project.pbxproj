@@ -35,10 +35,13 @@
 		792059E8E727E69055521BF5 /* GoalRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DDB965B0BF350AB2BA804F /* GoalRowView.swift */; };
 		8098E3CE2859DBF3163B740B /* AppTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC1091E417DF16EE305DC0D6 /* AppTheme.swift */; };
 		8884199112882AD0936C4FB5 /* ColorPickerRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AFDA0E9B4182C3319C0173A /* ColorPickerRow.swift */; };
+		8AD65A882F66D1F100AB7AB8 /* AppearanceSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD65A872F66D1F100AB7AB8 /* AppearanceSettingsView.swift */; };
+		8AD65A8A2F66D20500AB7AB8 /* UndoSnackbarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AD65A892F66D20500AB7AB8 /* UndoSnackbarView.swift */; };
 		91ED331B8AA092A892EE3B7E /* PeriodNavigatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5DB01F6108984534EC8ADA /* PeriodNavigatorView.swift */; };
 		986F635B3BF3B76A16811024 /* GoalDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9632CC16B3DCB452B2619E2 /* GoalDetailView.swift */; };
 		9A971FC58ABCCA8EDE4BB514 /* GoalStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B3EAE3C1549C3158847305B /* GoalStatus.swift */; };
 		9FFAD1C95B31BE8A0406903D /* DataManagementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04062B9EA49CED0F1D5FF80C /* DataManagementView.swift */; };
+		AA1122334455667788990011 /* SchemaVersioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1122334455667788990011 /* SchemaVersioning.swift */; };
 		AE35D8FB7E5E4B47C06A936B /* DateRangePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 268DC81323209FEA97A8AD6B /* DateRangePickerView.swift */; };
 		DA74B27323A33036A89804E4 /* Date+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B56F08FA8C463C94AFA9FF8 /* Date+Helpers.swift */; };
 		DDEEE73E70106485649A68F3 /* View+Modifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AEF5E1A83D44C3F0B852AE8 /* View+Modifiers.swift */; };
@@ -47,7 +50,34 @@
 		F06BB2899A86F3E221BB00F8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3030A5FED1D942CB59AFC48A /* Assets.xcassets */; };
 		F258EF74E211C6777B041DE9 /* GoalPeriod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 61B4653360EB68857BB15DF8 /* GoalPeriod.swift */; };
 		F48937DCC6DE8B429E21E83F /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 07E6C653CAC13FCF7CD1F03D /* NotificationService.swift */; };
-		AA1122334455667788990011 /* SchemaVersioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB1122334455667788990011 /* SchemaVersioning.swift */; };
+		D0000001D0000001D0000001 /* University.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000001C0000001C0000001 /* University.swift */; };
+		D0000002D0000002D0000002 /* EntranceExam.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000002C0000002C0000002 /* EntranceExam.swift */; };
+		D0000003D0000003D0000003 /* StudentReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000003C0000003C0000003 /* StudentReview.swift */; };
+		D0000004D0000004D0000004 /* PhdProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000004C0000004C0000004 /* PhdProgram.swift */; };
+		D0000005D0000005D0000005 /* PhdProgramsDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000005C0000005C0000005 /* PhdProgramsDataProvider.swift */; };
+		D0000006D0000006D0000006 /* PhdProgramsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000006C0000006C0000006 /* PhdProgramsViewModel.swift */; };
+		D0000007D0000007D0000007 /* ExamBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000007C0000007C0000007 /* ExamBadgeView.swift */; };
+		D0000008D0000008D0000008 /* ReviewCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000008C0000008C0000008 /* ReviewCardView.swift */; };
+		D0000009D0000009D0000009 /* ProgramDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0000009C0000009C0000009 /* ProgramDetailView.swift */; };
+		D000000AD000000AD000000A /* ProgramCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C000000AC000000AC000000A /* ProgramCardView.swift */; };
+		D000000BD000000BD000000B /* UniversitySectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C000000BC000000BC000000B /* UniversitySectionView.swift */; };
+		D000000CD000000CD000000C /* PhdProgramsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C000000CC000000CC000000C /* PhdProgramsListView.swift */; };
+		D000000DD000000DD000000D /* ProjectsTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C000000DC000000DC000000D /* ProjectsTabView.swift */; };
+		BF11111100000001BF111111 /* Rule.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000001FF111111 /* Rule.swift */; };
+		BF11111100000002BF111111 /* RuleKind.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000002FF111111 /* RuleKind.swift */; };
+		BF11111100000003BF111111 /* BackupCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000003FF111111 /* BackupCoordinator.swift */; };
+		BF11111100000004BF111111 /* BackupFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000004FF111111 /* BackupFileManager.swift */; };
+		BF11111100000005BF111111 /* BackupScheduler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000005FF111111 /* BackupScheduler.swift */; };
+		BF11111100000006BF111111 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000006FF111111 /* KeychainHelper.swift */; };
+		BF11111100000007BF111111 /* TelegramBackupService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000007FF111111 /* TelegramBackupService.swift */; };
+		BF11111100000008BF111111 /* RuleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000008FF111111 /* RuleDetailView.swift */; };
+		BF11111100000009BF111111 /* RuleFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF11111100000009FF111111 /* RuleFormView.swift */; };
+		BF1111110000000ABF111111 /* RuleRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000AFF111111 /* RuleRowView.swift */; };
+		BF1111110000000BBF111111 /* RulesTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000BFF111111 /* RulesTabView.swift */; };
+		BF1111110000000CBF111111 /* RulesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000CFF111111 /* RulesViewModel.swift */; };
+		BF1111110000000DBF111111 /* BackupListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000DFF111111 /* BackupListView.swift */; };
+		BF1111110000000EBF111111 /* BackupSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000EFF111111 /* BackupSettingsView.swift */; };
+		BF1111110000000FBF111111 /* RestorePromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF1111110000000FFF111111 /* RestorePromptView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +102,8 @@
 		6AEF5E1A83D44C3F0B852AE8 /* View+Modifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Modifiers.swift"; sourceTree = "<group>"; };
 		6F88E8C822BA532A2BD9B24D /* CategoryManagementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryManagementView.swift; sourceTree = "<group>"; };
 		778EA06A8827A3FCBE9FE685 /* AppColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppColors.swift; sourceTree = "<group>"; };
+		8AD65A872F66D1F100AB7AB8 /* AppearanceSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppearanceSettingsView.swift; sourceTree = "<group>"; };
+		8AD65A892F66D20500AB7AB8 /* UndoSnackbarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UndoSnackbarView.swift; sourceTree = "<group>"; };
 		90A663A0EC7D87DD1EED6867 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		934ACF57617F978923DBE29D /* TaskManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A841045CE3301AD6AB8BE3B /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
@@ -80,6 +112,7 @@
 		AF43C6186F9239387056F38E /* GoalPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalPriority.swift; sourceTree = "<group>"; };
 		B6CB8F1A4FE13DCAC2A932FF /* EmptyStateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyStateView.swift; sourceTree = "<group>"; };
 		B9632CC16B3DCB452B2619E2 /* GoalDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalDetailView.swift; sourceTree = "<group>"; };
+		BB1122334455667788990011 /* SchemaVersioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaVersioning.swift; sourceTree = "<group>"; };
 		BD987DDCAB2C79F389B4A141 /* StatisticsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsTabView.swift; sourceTree = "<group>"; };
 		BDECB6AD00F3823E82BAA81E /* GoalsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsTabView.swift; sourceTree = "<group>"; };
 		BF52CB713BED3460D513899F /* GoalsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoalsViewModel.swift; sourceTree = "<group>"; };
@@ -92,7 +125,34 @@
 		EC1091E417DF16EE305DC0D6 /* AppTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTheme.swift; sourceTree = "<group>"; };
 		F2B4E98F2571EF18B4BA788C /* Goal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Goal.swift; sourceTree = "<group>"; };
 		FE825487748C79239958A1DA /* OnboardingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingViewModel.swift; sourceTree = "<group>"; };
-		BB1122334455667788990011 /* SchemaVersioning.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchemaVersioning.swift; sourceTree = "<group>"; };
+		C0000001C0000001C0000001 /* University.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = University.swift; sourceTree = "<group>"; };
+		C0000002C0000002C0000002 /* EntranceExam.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntranceExam.swift; sourceTree = "<group>"; };
+		C0000003C0000003C0000003 /* StudentReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentReview.swift; sourceTree = "<group>"; };
+		C0000004C0000004C0000004 /* PhdProgram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdProgram.swift; sourceTree = "<group>"; };
+		C0000005C0000005C0000005 /* PhdProgramsDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdProgramsDataProvider.swift; sourceTree = "<group>"; };
+		C0000006C0000006C0000006 /* PhdProgramsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdProgramsViewModel.swift; sourceTree = "<group>"; };
+		C0000007C0000007C0000007 /* ExamBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamBadgeView.swift; sourceTree = "<group>"; };
+		C0000008C0000008C0000008 /* ReviewCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCardView.swift; sourceTree = "<group>"; };
+		C0000009C0000009C0000009 /* ProgramDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramDetailView.swift; sourceTree = "<group>"; };
+		C000000AC000000AC000000A /* ProgramCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgramCardView.swift; sourceTree = "<group>"; };
+		C000000BC000000BC000000B /* UniversitySectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversitySectionView.swift; sourceTree = "<group>"; };
+		C000000CC000000CC000000C /* PhdProgramsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdProgramsListView.swift; sourceTree = "<group>"; };
+		C000000DC000000DC000000D /* ProjectsTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProjectsTabView.swift; sourceTree = "<group>"; };
+		FF11111100000001FF111111 /* Rule.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rule.swift; sourceTree = "<group>"; };
+		FF11111100000002FF111111 /* RuleKind.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleKind.swift; sourceTree = "<group>"; };
+		FF11111100000003FF111111 /* BackupCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupCoordinator.swift; sourceTree = "<group>"; };
+		FF11111100000004FF111111 /* BackupFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFileManager.swift; sourceTree = "<group>"; };
+		FF11111100000005FF111111 /* BackupScheduler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupScheduler.swift; sourceTree = "<group>"; };
+		FF11111100000006FF111111 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		FF11111100000007FF111111 /* TelegramBackupService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TelegramBackupService.swift; sourceTree = "<group>"; };
+		FF11111100000008FF111111 /* RuleDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleDetailView.swift; sourceTree = "<group>"; };
+		FF11111100000009FF111111 /* RuleFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleFormView.swift; sourceTree = "<group>"; };
+		FF1111110000000AFF111111 /* RuleRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleRowView.swift; sourceTree = "<group>"; };
+		FF1111110000000BFF111111 /* RulesTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesTabView.swift; sourceTree = "<group>"; };
+		FF1111110000000CFF111111 /* RulesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RulesViewModel.swift; sourceTree = "<group>"; };
+		FF1111110000000DFF111111 /* BackupListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupListView.swift; sourceTree = "<group>"; };
+		FF1111110000000EFF111111 /* BackupSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupSettingsView.swift; sourceTree = "<group>"; };
+		FF1111110000000FFF111111 /* RestorePromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestorePromptView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,9 +188,14 @@
 		2B00BA96518C9B2E1D95D2C6 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				FF11111100000003FF111111 /* BackupCoordinator.swift */,
+				FF11111100000004FF111111 /* BackupFileManager.swift */,
+				FF11111100000005FF111111 /* BackupScheduler.swift */,
 				EA951FE4B751CAAEF62FCA92 /* DataExportService.swift */,
 				DB467A1B598BEB6F84F31457 /* DateHelper.swift */,
+				FF11111100000006FF111111 /* KeychainHelper.swift */,
 				07E6C653CAC13FCF7CD1F03D /* NotificationService.swift */,
+				FF11111100000007FF111111 /* TelegramBackupService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -181,6 +246,7 @@
 		510989499AA2A1792428EED4 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				8AD65A892F66D20500AB7AB8 /* UndoSnackbarView.swift */,
 				2AFDA0E9B4182C3319C0173A /* ColorPickerRow.swift */,
 				268DC81323209FEA97A8AD6B /* DateRangePickerView.swift */,
 				B6CB8F1A4FE13DCAC2A932FF /* EmptyStateView.swift */,
@@ -207,6 +273,7 @@
 			children = (
 				0A8EA333CEE529F057AD8A6E /* OnboardingView.swift */,
 				FE825487748C79239958A1DA /* OnboardingViewModel.swift */,
+				FF1111110000000FFF111111 /* RestorePromptView.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -226,6 +293,8 @@
 			children = (
 				3FEE354435339ACAE3EEA974 /* Goals */,
 				75503FFB9897F63AAB64AC3F /* Onboarding */,
+				E0000001E0000001E0000001 /* Projects */,
+				AB1111110000000100000001 /* Rules */,
 				E9CE5A76AC4EF413D4DA0810 /* Settings */,
 				74F945F5901C5803E39068DE /* Statistics */,
 			);
@@ -243,6 +312,9 @@
 		E9CE5A76AC4EF413D4DA0810 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				8AD65A872F66D1F100AB7AB8 /* AppearanceSettingsView.swift */,
+				FF1111110000000DFF111111 /* BackupListView.swift */,
+				FF1111110000000EFF111111 /* BackupSettingsView.swift */,
 				6F88E8C822BA532A2BD9B24D /* CategoryManagementView.swift */,
 				04062B9EA49CED0F1D5FF80C /* DataManagementView.swift */,
 				09DA8BC4F7CA74E19DBB79D0 /* NotificationSettingsView.swift */,
@@ -261,7 +333,9 @@
 				AF43C6186F9239387056F38E /* GoalPriority.swift */,
 				ADF378785B527FCBA1E84B42 /* GoalReminder.swift */,
 				2B3EAE3C1549C3158847305B /* GoalStatus.swift */,
-			BB1122334455667788990011 /* SchemaVersioning.swift */,
+				FF11111100000001FF111111 /* Rule.swift */,
+				FF11111100000002FF111111 /* RuleKind.swift */,
+				BB1122334455667788990011 /* SchemaVersioning.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -272,6 +346,63 @@
 				934ACF57617F978923DBE29D /* TaskManager.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+
+		E0000002E0000002E0000002 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C0000001C0000001C0000001 /* University.swift */,
+				C0000002C0000002C0000002 /* EntranceExam.swift */,
+				C0000003C0000003C0000003 /* StudentReview.swift */,
+				C0000004C0000004C0000004 /* PhdProgram.swift */,
+				C0000005C0000005C0000005 /* PhdProgramsDataProvider.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E0000003E0000003E0000003 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C0000007C0000007C0000007 /* ExamBadgeView.swift */,
+				C0000008C0000008C0000008 /* ReviewCardView.swift */,
+				C0000009C0000009C0000009 /* ProgramDetailView.swift */,
+				C000000AC000000AC000000A /* ProgramCardView.swift */,
+				C000000BC000000BC000000B /* UniversitySectionView.swift */,
+				C000000CC000000CC000000C /* PhdProgramsListView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E0000004E0000004E0000004 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C0000006C0000006C0000006 /* PhdProgramsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		E0000001E0000001E0000001 /* Projects */ = {
+			isa = PBXGroup;
+			children = (
+				E0000002E0000002E0000002 /* Models */,
+				E0000003E0000003E0000003 /* Views */,
+				E0000004E0000004E0000004 /* ViewModel */,
+				C000000DC000000DC000000D /* ProjectsTabView.swift */,
+			);
+			path = Projects;
+			sourceTree = "<group>";
+		};
+		AB1111110000000100000001 /* Rules */ = {
+			isa = PBXGroup;
+			children = (
+				FF11111100000008FF111111 /* RuleDetailView.swift */,
+				FF11111100000009FF111111 /* RuleFormView.swift */,
+				FF1111110000000AFF111111 /* RuleRowView.swift */,
+				FF1111110000000BFF111111 /* RulesTabView.swift */,
+				FF1111110000000CFF111111 /* RulesViewModel.swift */,
+			);
+			path = Rules;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -355,6 +486,7 @@
 				DA74B27323A33036A89804E4 /* Date+Helpers.swift in Sources */,
 				DDEEE73E70106485649A68F3 /* View+Modifiers.swift in Sources */,
 				73A9F32406A27FBF4215A499 /* DataExportService.swift in Sources */,
+				8AD65A882F66D1F100AB7AB8 /* AppearanceSettingsView.swift in Sources */,
 				5359ACB3BE3254D1FED99F72 /* DateHelper.swift in Sources */,
 				F48937DCC6DE8B429E21E83F /* NotificationService.swift in Sources */,
 				5F87E54EA880B1A3329FB5FD /* CompletionChartView.swift in Sources */,
@@ -381,8 +513,37 @@
 				19699F033FDAB6710ECE0065 /* PriorityIndicator.swift in Sources */,
 				138364AE13C1075171AEC470 /* StatusBadge.swift in Sources */,
 				AA1122334455667788990011 /* SchemaVersioning.swift in Sources */,
+				8AD65A8A2F66D20500AB7AB8 /* UndoSnackbarView.swift in Sources */,
 				2F1BBD66009C7751EA243E6B /* AppColors.swift in Sources */,
 				8098E3CE2859DBF3163B740B /* AppTheme.swift in Sources */,
+				D0000001D0000001D0000001 /* University.swift in Sources */,
+				D0000002D0000002D0000002 /* EntranceExam.swift in Sources */,
+				D0000003D0000003D0000003 /* StudentReview.swift in Sources */,
+				D0000004D0000004D0000004 /* PhdProgram.swift in Sources */,
+				D0000005D0000005D0000005 /* PhdProgramsDataProvider.swift in Sources */,
+				D0000006D0000006D0000006 /* PhdProgramsViewModel.swift in Sources */,
+				D0000007D0000007D0000007 /* ExamBadgeView.swift in Sources */,
+				D0000008D0000008D0000008 /* ReviewCardView.swift in Sources */,
+				D0000009D0000009D0000009 /* ProgramDetailView.swift in Sources */,
+				D000000AD000000AD000000A /* ProgramCardView.swift in Sources */,
+				D000000BD000000BD000000B /* UniversitySectionView.swift in Sources */,
+				D000000CD000000CD000000C /* PhdProgramsListView.swift in Sources */,
+				D000000DD000000DD000000D /* ProjectsTabView.swift in Sources */,
+				BF11111100000001BF111111 /* Rule.swift in Sources */,
+				BF11111100000002BF111111 /* RuleKind.swift in Sources */,
+				BF11111100000003BF111111 /* BackupCoordinator.swift in Sources */,
+				BF11111100000004BF111111 /* BackupFileManager.swift in Sources */,
+				BF11111100000005BF111111 /* BackupScheduler.swift in Sources */,
+				BF11111100000006BF111111 /* KeychainHelper.swift in Sources */,
+				BF11111100000007BF111111 /* TelegramBackupService.swift in Sources */,
+				BF11111100000008BF111111 /* RuleDetailView.swift in Sources */,
+				BF11111100000009BF111111 /* RuleFormView.swift in Sources */,
+				BF1111110000000ABF111111 /* RuleRowView.swift in Sources */,
+				BF1111110000000BBF111111 /* RulesTabView.swift in Sources */,
+				BF1111110000000CBF111111 /* RulesViewModel.swift in Sources */,
+				BF1111110000000DBF111111 /* BackupListView.swift in Sources */,
+				BF1111110000000EBF111111 /* BackupSettingsView.swift in Sources */,
+				BF1111110000000FBF111111 /* RestorePromptView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,8 +617,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Task Manager";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIFileSharingEnabled = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -550,8 +713,10 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_CFBundleDisplayName = "Task Manager";
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UIFileSharingEnabled = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

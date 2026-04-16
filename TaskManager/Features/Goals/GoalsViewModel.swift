@@ -240,12 +240,23 @@ final class GoalsViewModel {
         fetchGoals()
     }
 
-    // MARK: - Move to Next Period
+    // MARK: - Move to Next/Previous Period
 
     func moveToNextPeriod(_ goal: Goal) {
         let nextDate = DateHelper.navigate(from: goal.periodStartDate, period: goal.period, direction: 1)
         let nextStart = DateHelper.periodStartDate(for: nextDate, period: goal.period)
         goal.periodStartDate = nextStart
+        goal.status = .new
+        goal.sortOrder = Int(Date().timeIntervalSince1970)
+        goal.updatedAt = Date()
+        try? modelContext?.save()
+        fetchGoals()
+    }
+
+    func moveToPreviousPeriod(_ goal: Goal) {
+        let prevDate = DateHelper.navigate(from: goal.periodStartDate, period: goal.period, direction: -1)
+        let prevStart = DateHelper.periodStartDate(for: prevDate, period: goal.period)
+        goal.periodStartDate = prevStart
         goal.status = .new
         goal.sortOrder = Int(Date().timeIntervalSince1970)
         goal.updatedAt = Date()

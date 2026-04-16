@@ -1,0 +1,263 @@
+import SwiftUI
+
+struct ProgramDetailView: View {
+    let program: PhdProgram
+    let university: University?
+
+    var body: some View {
+        ScrollView {
+            VStack(alignment: .leading, spacing: 20) {
+                // University info
+                if let uni = university {
+                    HStack(spacing: 12) {
+                        Image(systemName: uni.logoSystemImage)
+                            .font(.title2)
+                            .foregroundStyle(AppColors.accent)
+                            .frame(width: 44, height: 44)
+                            .background(AppColors.accent.opacity(0.12))
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                        VStack(alignment: .leading, spacing: 2) {
+                            Text(uni.shortName)
+                                .font(.headline)
+                                .foregroundStyle(AppColors.textPrimary)
+                            Text(uni.city)
+                                .font(.subheadline)
+                                .foregroundStyle(AppColors.textSecondary)
+                        }
+                    }
+                    .cardStyle()
+                }
+
+                // General info
+                VStack(spacing: 12) {
+                    infoRow(title: "Код направления", value: program.code)
+                    infoRow(title: "Направление", value: program.fieldOfStudy)
+                    infoRow(title: "Срок обучения", value: "\(program.durationYears) \(yearsString(program.durationYears))")
+                }
+                .cardStyle()
+
+                // Description
+                if !program.programDescription.isEmpty {
+                    VStack(alignment: .leading, spacing: 8) {
+                        sectionTitle("Описание")
+                        Text(program.programDescription)
+                            .font(.subheadline)
+                            .foregroundStyle(AppColors.textPrimary)
+                            .fixedSize(horizontal: false, vertical: true)
+                    }
+                    .cardStyle()
+                }
+
+                // Places
+                VStack(alignment: .leading, spacing: 12) {
+                    sectionTitle("Места")
+                    HStack(spacing: 12) {
+                        statBlock(value: "\(program.totalPlaces)", label: "Всего", color: AppColors.accent)
+                        statBlock(value: "\(program.budgetPlaces)", label: "Бюджет", color: AppColors.green)
+                        statBlock(value: "\(program.paidPlaces)", label: "Платных", color: Color(hex: "#F59E0B"))
+                    }
+
+                    if program.totalPlaces > 0 {
+                        GeometryReader { geo in
+                            HStack(spacing: 2) {
+                                RoundedRectangle(cornerRadius: 3)
+                                    .fill(AppColors.green)
+                                    .frame(width: geo.size.width * CGFloat(program.budgetPlaces) / CGFloat(program.totalPlaces))
+                                RoundedRectangle(cornerRadius: 3)
+                                    .fill(Color(hex: "#F59E0B"))
+                                    .frame(width: geo.size.width * CGFloat(program.paidPlaces) / CGFloat(program.totalPlaces))
+                            }
+                        }
+                        .frame(height: 8)
+
+                        HStack(spacing: 16) {
+                            HStack(spacing: 4) {
+                                Circle().fill(AppColors.green).frame(width: 8, height: 8)
+                                Text("Бюджет").font(.caption).foregroundStyle(AppColors.textSecondary)
+                            }
+                            HStack(spacing: 4) {
+                                Circle().fill(Color(hex: "#F59E0B")).frame(width: 8, height: 8)
+                                Text("Платные").font(.caption).foregroundStyle(AppColors.textSecondary)
+                            }
+                        }
+                    }
+                }
+                .cardStyle()
+
+                // Cost
+                if let tuition = program.tuitionPerYear {
+                    VStack(spacing: 12) {
+                        infoRow(title: "Стоимость обучения", value: formatCurrency(tuition) + " ₽/год")
+                        infoRow(title: "За весь срок", value: formatCurrency(tuition * program.durationYears) + " ₽")
+                    }
+                    .cardStyle()
+                } else if program.paidPlaces == 0 {
+                    HStack {
+                        Image(systemName: "checkmark.seal.fill")
+                            .foregroundStyle(AppColors.green)
+                        Text("Все места бюджетные")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundStyle(AppColors.green)
+                    }
+                    .cardStyle()
+                }
+
+                // Dates
+                VStack(alignment: .leading, spacing: 12) {
+                    sectionTitle("Приёмная кампания")
+                    infoRow(title: "Приём документов", value: "\(program.applicationStartDate) – \(program.applicationEndDate)")
+                    infoRow(title: "Вступительные испытания", value: program.examPeriod)
+                }
+                .cardStyle()
+
+                // Exams
+                VStack(alignment: .leading, spacing: 12) {
+                    sectionTitle("Вступительные испытания")
+                    ForEach(program.entranceExams) { exam in
+                        ExamBadgeView(exam: exam)
+                    }
+                }
+                .cardStyle()
+
+                // Portfolio
+                if program.portfolioRequired {
+                    VStack(alignment: .leading, spacing: 8) {
+                        HStack {
+                            Image(systemName: "doc.text.fill")
+                                .foregroundStyle(Color(hex: "#EC4899"))
+                            sectionTitle("Портфолио")
+                        }
+                        Text("Требуется")
+                            .font(.subheadline)
+                            .fontWeight(.medium)
+                            .foregroundStyle(Color(hex: "#EC4899"))
+                        if let details = program.portfolioDetails {
+                            Text(details)
+                                .font(.caption)
+                                .foregroundStyle(AppColors.textSecondary)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+                    }
+                    .cardStyle()
+                } else {
+                    HStack {
+                        Image(systemName: "xmark.circle")
+                            .foregroundStyle(AppColors.neutral)
+                        Text("Портфолио не требуется")
+                            .font(.subheadline)
+                            .foregroundStyle(AppColors.textSecondary)
+                    }
+                    .cardStyle()
+                }
+
+                // Last year stats
+                if program.lastYearApplicants != nil || program.passingScoreLastYear != nil {
+                    VStack(alignment: .leading, spacing: 12) {
+                        sectionTitle("Статистика прошлого года")
+                        if let applicants = program.lastYearApplicants {
+                            infoRow(title: "Подало заявления", value: "\(applicants)")
+                        }
+                        if let enrolled = program.lastYearEnrolled {
+                            infoRow(title: "Зачислено", value: "\(enrolled)")
+                        }
+                        if let score = program.passingScoreLastYear {
+                            infoRow(title: "Проходной балл", value: "\(score)")
+                        }
+                        if let applicants = program.lastYearApplicants, let enrolled = program.lastYearEnrolled, enrolled > 0 {
+                            let competition = Double(applicants) / Double(enrolled)
+                            infoRow(title: "Конкурс", value: String(format: "%.1f чел./место", competition))
+                        }
+                    }
+                    .cardStyle()
+                }
+
+                // Reviews
+                if !program.reviews.isEmpty {
+                    VStack(alignment: .leading, spacing: 12) {
+                        HStack {
+                            sectionTitle("Отзывы")
+                            Spacer()
+                            Text("\(program.reviews.count)")
+                                .font(.caption)
+                                .fontWeight(.medium)
+                                .foregroundStyle(AppColors.accent)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 3)
+                                .background(AppColors.accent.opacity(0.12))
+                                .clipShape(Capsule())
+                        }
+                        ForEach(program.reviews) { review in
+                            ReviewCardView(review: review)
+                        }
+                    }
+                    .cardStyle()
+                }
+
+                // Disclaimer
+                Text("Данные носят справочный характер и могут отличаться от актуальных. Проверяйте информацию на сайте вуза.")
+                    .font(.caption2)
+                    .foregroundStyle(AppColors.neutral)
+                    .multilineTextAlignment(.center)
+                    .frame(maxWidth: .infinity)
+                    .padding(.top, 8)
+            }
+            .padding(AppTheme.horizontalPadding)
+        }
+        .background(AppColors.background)
+        .navigationTitle(program.name)
+        .navigationBarTitleDisplayMode(.large)
+    }
+
+    // MARK: - Helpers
+
+    private func infoRow(title: String, value: String) -> some View {
+        HStack {
+            Text(title)
+                .foregroundStyle(AppColors.textSecondary)
+            Spacer()
+            Text(value)
+                .foregroundStyle(AppColors.textPrimary)
+                .multilineTextAlignment(.trailing)
+        }
+        .font(.subheadline)
+    }
+
+    private func sectionTitle(_ text: String) -> some View {
+        Text(text)
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .foregroundStyle(AppColors.textPrimary)
+    }
+
+    private func statBlock(value: String, label: String, color: Color) -> some View {
+        VStack(spacing: 4) {
+            Text(value)
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundStyle(color)
+            Text(label)
+                .font(.caption)
+                .foregroundStyle(AppColors.textSecondary)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 10)
+        .background(color.opacity(0.08))
+        .clipShape(RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius))
+    }
+
+    private func formatCurrency(_ amount: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.groupingSeparator = " "
+        return formatter.string(from: NSNumber(value: amount)) ?? "\(amount)"
+    }
+
+    private func yearsString(_ years: Int) -> String {
+        switch years {
+        case 1: return "год"
+        case 2, 3, 4: return "года"
+        default: return "лет"
+        }
+    }
+}

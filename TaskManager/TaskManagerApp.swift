@@ -4,6 +4,7 @@ import SwiftData
 @main
 struct TaskManagerApp: App {
     let container: ModelContainer
+    @Environment(\.scenePhase) private var scenePhase
     @AppStorage("appTheme") private var appTheme = "dark"
 
     init() {
@@ -13,13 +14,14 @@ struct TaskManagerApp: App {
                 cloudKitDatabase: .automatic
             )
             container = try ModelContainer(
-                for: Goal.self, Category.self, GoalReminder.self,
-                migrationPlan: MigrationPlan.self,
+                for: Goal.self, Category.self, GoalReminder.self, Rule.self,
                 configurations: config
             )
         } catch {
             fatalError("Failed to initialize ModelContainer: \(error)")
         }
+
+        BackupScheduler.register(modelContainer: container)
     }
 
     private var colorScheme: ColorScheme? {
@@ -36,5 +38,17 @@ struct TaskManagerApp: App {
                 .preferredColorScheme(colorScheme)
         }
         .modelContainer(container)
+        .onChange(of: scenePhase) { _, newPhase in
+            switch newPhase {
+            case .background:
+                BackupScheduler.scheduleNext()
+            case .active:
+                Task { @MainActor in
+                    await BackupScheduler.runIfDue(container: container)
+                }
+            default:
+                break
+            }
+        }
     }
 }
