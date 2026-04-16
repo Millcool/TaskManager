@@ -22,6 +22,7 @@ struct TaskManagerApp: App {
         }
 
         BackupScheduler.register(modelContainer: container)
+        InstallTracker.scheduleExpirationNotification()
     }
 
     private var colorScheme: ColorScheme? {
