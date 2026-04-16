@@ -6,10 +6,21 @@ struct ProgramDetailView: View {
 
     @State private var store = PhdApplicationStore.shared
     @State private var now: Date = Date()
+    @State private var activeLink: SafariLink?
     private let tick = Timer.publish(every: 3600, on: .main, in: .common).autoconnect()
 
     private var status: PhdApplicationStatus { store.status(for: program.id) }
     private var urgency: PhdApplicationUrgency { PhdApplicationIndicator.urgency(for: program, now: now) }
+
+    private var programPageURL: URL? {
+        PhdProgramsDataProvider.resolvedProgramPageURL(for: program).flatMap(URL.init)
+    }
+    private var applicationPortalURL: URL? {
+        PhdProgramsDataProvider.resolvedApplicationPortalURL(for: program).flatMap(URL.init)
+    }
+    private var curriculumURL: URL? {
+        PhdProgramsDataProvider.curriculumURL(for: program).flatMap(URL.init)
+    }
 
     var body: some View {
         ScrollView {
@@ -36,6 +47,9 @@ struct ProgramDetailView: View {
                     }
                     .cardStyle()
                 }
+
+                // Useful links
+                linksCard
 
                 // General info
                 VStack(spacing: 12) {
@@ -217,6 +231,91 @@ struct ProgramDetailView: View {
         .navigationTitle(program.name)
         .navigationBarTitleDisplayMode(.large)
         .onReceive(tick) { now = $0 }
+        .sheet(item: $activeLink) { link in
+            SafariView(url: link.url)
+                .ignoresSafeArea()
+        }
+    }
+
+    // MARK: - Useful links
+
+    @ViewBuilder
+    private var linksCard: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            sectionTitle("Полезные ссылки")
+
+            if let url = programPageURL {
+                linkRow(
+                    title: "Страница программы",
+                    subtitle: url.host ?? url.absoluteString,
+                    systemImage: "globe",
+                    color: AppColors.accent,
+                    url: url
+                )
+            }
+
+            if let url = applicationPortalURL {
+                linkRow(
+                    title: "Подача документов",
+                    subtitle: url.host ?? url.absoluteString,
+                    systemImage: "square.and.arrow.up.on.square",
+                    color: Color(hex: "#F59E0B"),
+                    url: url
+                )
+            }
+
+            if let url = curriculumURL {
+                linkRow(
+                    title: "Учебный план (PDF)",
+                    subtitle: "Открыть PDF во встроенном просмотре",
+                    systemImage: "doc.richtext.fill",
+                    color: AppColors.green,
+                    url: url
+                )
+            } else {
+                HStack(spacing: 8) {
+                    Image(systemName: "doc.text")
+                        .foregroundStyle(AppColors.neutral)
+                    Text("Учебный план PDF не опубликован публично вузом — загляните на страницу программы")
+                        .font(.caption)
+                        .foregroundStyle(AppColors.textSecondary)
+                        .fixedSize(horizontal: false, vertical: true)
+                }
+                .padding(.top, 2)
+            }
+        }
+        .cardStyle()
+    }
+
+    private func linkRow(title: String, subtitle: String, systemImage: String, color: Color, url: URL) -> some View {
+        Button {
+            activeLink = SafariLink(url: url)
+        } label: {
+            HStack(spacing: 12) {
+                Image(systemName: systemImage)
+                    .font(.title3)
+                    .foregroundStyle(color)
+                    .frame(width: 32, height: 32)
+                    .background(color.opacity(0.14))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                VStack(alignment: .leading, spacing: 2) {
+                    Text(title)
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                        .foregroundStyle(AppColors.textPrimary)
+                    Text(subtitle)
+                        .font(.caption)
+                        .foregroundStyle(AppColors.textSecondary)
+                        .lineLimit(1)
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.caption)
+                    .foregroundStyle(AppColors.neutral)
+            }
+            .padding(.vertical, 4)
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - Application status card
