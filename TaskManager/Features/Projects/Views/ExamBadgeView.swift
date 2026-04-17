@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ExamBadgeView: View {
     let exam: EntranceExam
+    @Binding var activeLink: SafariLink?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -35,6 +36,26 @@ struct ExamBadgeView: View {
                     .font(.caption)
                     .foregroundStyle(AppColors.textSecondary)
             }
+
+            if hasLinks {
+                HStack(spacing: 8) {
+                    if let infoURL = exam.infoURL.flatMap(URL.init) {
+                        linkButton(
+                            title: "Страница",
+                            systemImage: "globe",
+                            url: infoURL
+                        )
+                    }
+                    if let pdfURL = exam.programPdfURL.flatMap(URL.init) {
+                        linkButton(
+                            title: "Программа PDF",
+                            systemImage: "doc.richtext",
+                            url: pdfURL
+                        )
+                    }
+                }
+                .padding(.top, 4)
+            }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
         .padding(12)
@@ -44,6 +65,30 @@ struct ExamBadgeView: View {
             RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius)
                 .stroke(AppColors.cardStroke, lineWidth: 1)
         )
+    }
+
+    private var hasLinks: Bool {
+        exam.infoURL != nil || exam.programPdfURL != nil
+    }
+
+    private func linkButton(title: String, systemImage: String, url: URL) -> some View {
+        Button {
+            activeLink = SafariLink(url: url)
+        } label: {
+            HStack(spacing: 4) {
+                Image(systemName: systemImage)
+                    .font(.caption2)
+                Text(title)
+                    .font(.caption2)
+                    .fontWeight(.semibold)
+            }
+            .foregroundStyle(badgeColor)
+            .padding(.horizontal, 8)
+            .padding(.vertical, 4)
+            .background(badgeColor.opacity(0.15))
+            .clipShape(Capsule())
+        }
+        .buttonStyle(.plain)
     }
 
     private var iconName: String {

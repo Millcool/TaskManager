@@ -138,7 +138,7 @@ struct ProgramDetailView: View {
                 VStack(alignment: .leading, spacing: 12) {
                     sectionTitle("Вступительные испытания")
                     ForEach(program.entranceExams) { exam in
-                        ExamBadgeView(exam: exam)
+                        ExamBadgeView(exam: exam, activeLink: $activeLink)
                     }
                 }
                 .cardStyle()
