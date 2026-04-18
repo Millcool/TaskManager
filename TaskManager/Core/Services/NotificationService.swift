@@ -155,6 +155,134 @@ final class NotificationService {
         }
     }
 
+    // MARK: - PhD Daily Deadline (23:00)
+
+    private static let phdDailyDeadlineIdPrefix = "phd_daily_deadline_"
+    private static let phdDailyDeadlineHorizonDays = 30
+
+    func rescheduleDailyDeadlineNotifications(
+        programs: [PhdProgram],
+        store: PhdApplicationStore = .shared,
+        universityLookup: @escaping (PhdProgram) -> University? = { PhdProgramsDataProvider.university(for: $0) }
+    ) {
+        center.getPendingNotificationRequests { [center] requests in
+            let toRemove = requests
+                .map(\.identifier)
+                .filter { $0.hasPrefix(Self.phdDailyDeadlineIdPrefix) }
+            if !toRemove.isEmpty {
+                center.removePendingNotificationRequests(withIdentifiers: toRemove)
+            }
+
+            let calendar = Calendar.current
+            let now = Date()
+
+            for offset in 0..<Self.phdDailyDeadlineHorizonDays {
+                guard let baseDate = calendar.date(byAdding: .day, value: offset, to: now),
+                      let triggerDate = calendar.date(bySettingHour: 23, minute: 0, second: 0, of: baseDate),
+                      triggerDate > now else { continue }
+
+                let candidates: [(PhdProgram, Int)] = programs.compactMap { program in
+                    guard store.status(for: program.id) == .notApplied,
+                          let start = PhdDateParser.date(from: program.applicationStartDate, reference: triggerDate) else {
+                        return nil
+                    }
+                    let fromDay = calendar.startOfDay(for: triggerDate)
+                    let toDay = calendar.startOfDay(for: start)
+                    guard let days = calendar.dateComponents([.day], from: fromDay, to: toDay).day, days > 0 else {
+                        return nil
+                    }
+                    return (program, days)
+                }
+
+                guard let nearest = candidates.min(by: { $0.1 < $1.1 }) else { continue }
+                let (program, days) = nearest
+                let uniName = universityLookup(program)?.shortName ?? "вуз"
+
+                let content = UNMutableNotificationContent()
+                content.title = "До приёма документов: \(days) \(Self.russianDayWord(days))"
+                content.body = "\(uniName) — «\(program.name)». Открытие: \(program.applicationStartDate)."
+                content.sound = .default
+
+                let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: triggerDate)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                let request = UNNotificationRequest(
+                    identifier: Self.phdDailyDeadlineIdPrefix + String(offset),
+                    content: content,
+                    trigger: trigger
+                )
+                center.add(request)
+            }
+        }
+    }
+
+    // MARK: - PhD Random Program Daily (12:00)
+
+    private static let phdRandomProgramIdPrefix = "phd_random_program_"
+    private static let phdRandomProgramHorizonDays = 30
+
+    func rescheduleDailyRandomProgramNotifications(
+        programs: [PhdProgram],
+        universityLookup: @escaping (PhdProgram) -> University? = { PhdProgramsDataProvider.university(for: $0) }
+    ) {
+        center.getPendingNotificationRequests { [center] requests in
+            let toRemove = requests
+                .map(\.identifier)
+                .filter { $0.hasPrefix(Self.phdRandomProgramIdPrefix) }
+            if !toRemove.isEmpty {
+                center.removePendingNotificationRequests(withIdentifiers: toRemove)
+            }
+
+            guard !programs.isEmpty else { return }
+            let calendar = Calendar.current
+            let now = Date()
+
+            for offset in 0..<Self.phdRandomProgramHorizonDays {
+                guard let baseDate = calendar.date(byAdding: .day, value: offset, to: now),
+                      let triggerDate = calendar.date(bySettingHour: 12, minute: 0, second: 0, of: baseDate),
+                      triggerDate > now,
+                      let program = programs.randomElement() else { continue }
+
+                let uniName = universityLookup(program)?.shortName ?? "вуз"
+                var lines: [String] = ["Код: \(program.code) • \(program.fieldOfStudy)"]
+                if let page = PhdProgramsDataProvider.resolvedProgramPageURL(for: program) {
+                    lines.append("Сайт программы: \(page)")
+                }
+                if let curriculum = PhdProgramsDataProvider.curriculumURL(for: program) {
+                    lines.append("Учебный план: \(curriculum)")
+                }
+                if let portal = PhdProgramsDataProvider.resolvedApplicationPortalURL(for: program) {
+                    lines.append("Подача документов: \(portal)")
+                }
+
+                let content = UNMutableNotificationContent()
+                content.title = "Аспирантура дня — \(uniName)"
+                content.subtitle = program.name
+                content.body = lines.joined(separator: "\n")
+                content.sound = .default
+                content.userInfo = ["phdProgramId": program.id.uuidString]
+
+                let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: triggerDate)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                let request = UNNotificationRequest(
+                    identifier: Self.phdRandomProgramIdPrefix + String(offset),
+                    content: content,
+                    trigger: trigger
+                )
+                center.add(request)
+            }
+        }
+    }
+
+    private static func russianDayWord(_ n: Int) -> String {
+        let lastTwo = abs(n) % 100
+        if (11...14).contains(lastTwo) { return "дней" }
+        switch abs(n) % 10 {
+        case 1: return "день"
+        case 2, 3, 4: return "дня"
+        default: return "дней"
+        }
+    }
+
     // MARK: - Private
 
     private func scheduleRepeating(id: String, title: String, body: String, hour: Int, minute: Int, weekday: Int?) {

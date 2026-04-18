@@ -26,6 +26,12 @@ struct TaskManagerApp: App {
         NotificationService.shared.reschedulePhdApplicationStartNotifications(
             programs: PhdProgramsDataProvider.programs
         )
+        NotificationService.shared.rescheduleDailyDeadlineNotifications(
+            programs: PhdProgramsDataProvider.programs
+        )
+        NotificationService.shared.rescheduleDailyRandomProgramNotifications(
+            programs: PhdProgramsDataProvider.programs
+        )
     }
 
     private var colorScheme: ColorScheme? {
