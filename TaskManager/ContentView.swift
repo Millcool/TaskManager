@@ -47,6 +47,18 @@ struct ContentView: View {
 }
 
 struct MainTabView: View {
+    @Query private var todayGoals: [Goal]
+
+    init() {
+        let calendar = Calendar.current
+        let start = calendar.startOfDay(for: Date())
+        let end = calendar.date(byAdding: .day, value: 1, to: start) ?? start
+        let dayPeriod = GoalPeriod.day.rawValue
+        _todayGoals = Query(filter: #Predicate<Goal> { goal in
+            goal.periodRaw == dayPeriod && goal.periodStartDate >= start && goal.periodStartDate < end
+        })
+    }
+
     var body: some View {
         TabView {
             GoalsTabView()
@@ -80,5 +92,9 @@ struct MainTabView: View {
                 }
         }
         .tint(AppColors.accent)
+        .fullScreenCover(isPresented: .constant(todayGoals.isEmpty)) {
+            DailyGoalsRequiredView()
+                .interactiveDismissDisabled(true)
+        }
     }
 }

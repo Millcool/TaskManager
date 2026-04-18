@@ -101,6 +101,7 @@
 		E100000DE100000DE100000D /* StudyGroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000DF100000DF100000D /* StudyGroupDetailView.swift */; };
 		E100000EE100000EE100000E /* StudyTopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000EF100000EF100000E /* StudyTopicDetailView.swift */; };
 		E2000001E2000001E2000001 /* DailyGoalChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2000001F2000001F2000001 /* DailyGoalChecker.swift */; };
+		E2000002E2000002E2000002 /* DailyGoalsRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2000002F2000002F2000002 /* DailyGoalsRequiredView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -199,6 +200,7 @@
 		F100000DF100000DF100000D /* StudyGroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupDetailView.swift; sourceTree = "<group>"; };
 		F100000EF100000EF100000E /* StudyTopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTopicDetailView.swift; sourceTree = "<group>"; };
 		F2000001F2000001F2000001 /* DailyGoalChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGoalChecker.swift; sourceTree = "<group>"; };
+		F2000002F2000002F2000002 /* DailyGoalsRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGoalsRequiredView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -270,6 +272,7 @@
 		3FEE354435339ACAE3EEA974 /* Goals */ = {
 			isa = PBXGroup;
 			children = (
+				F2000002F2000002F2000002 /* DailyGoalsRequiredView.swift */,
 				B9632CC16B3DCB452B2619E2 /* GoalDetailView.swift */,
 				DF9372A21F1F62B3787D864D /* GoalFormView.swift */,
 				D7DDB965B0BF350AB2BA804F /* GoalRowView.swift */,
@@ -660,6 +663,7 @@
 				E100000DE100000DE100000D /* StudyGroupDetailView.swift in Sources */,
 				E100000EE100000EE100000E /* StudyTopicDetailView.swift in Sources */,
 				E2000001E2000001E2000001 /* DailyGoalChecker.swift in Sources */,
+				E2000002E2000002E2000002 /* DailyGoalsRequiredView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
