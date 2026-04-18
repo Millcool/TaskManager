@@ -86,6 +86,20 @@
 		CC11111100000006CC111111 /* PhdDateParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000006DD111111 /* PhdDateParser.swift */; };
 		CC11111100000007CC111111 /* PhdProgramLinks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000007DD111111 /* PhdProgramLinks.swift */; };
 		CC11111100000008CC111111 /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD11111100000008DD111111 /* SafariView.swift */; };
+		E1000001E1000001E1000001 /* StudyQuestion.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000001F1000001F1000001 /* StudyQuestion.swift */; };
+		E1000002E1000002E1000002 /* StudyTopic.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000002F1000002F1000002 /* StudyTopic.swift */; };
+		E1000003E1000003E1000003 /* StudyGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000003F1000003F1000003 /* StudyGroup.swift */; };
+		E1000004E1000004E1000004 /* StudyContent_CS.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000004F1000004F1000004 /* StudyContent_CS.swift */; };
+		E1000005E1000005E1000005 /* StudyContent_ML.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000005F1000005F1000005 /* StudyContent_ML.swift */; };
+		E1000006E1000006E1000006 /* StudyContent_SystemAnalysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000006F1000006F1000006 /* StudyContent_SystemAnalysis.swift */; };
+		E1000007E1000007E1000007 /* StudyContent_Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000007F1000007F1000007 /* StudyContent_Math.swift */; };
+		E1000008E1000008E1000008 /* StudyContent_English.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000008F1000008F1000008 /* StudyContent_English.swift */; };
+		E1000009E1000009E1000009 /* StudyContent_Philosophy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1000009F1000009F1000009 /* StudyContent_Philosophy.swift */; };
+		E100000AE100000AE100000A /* StudyDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000AF100000AF100000A /* StudyDataProvider.swift */; };
+		E100000BE100000BE100000B /* StudyTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000BF100000BF100000B /* StudyTabView.swift */; };
+		E100000CE100000CE100000C /* StudyProgramDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000CF100000CF100000C /* StudyProgramDetailView.swift */; };
+		E100000DE100000DE100000D /* StudyGroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000DF100000DF100000D /* StudyGroupDetailView.swift */; };
+		E100000EE100000EE100000E /* StudyTopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000EF100000EF100000E /* StudyTopicDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -169,6 +183,20 @@
 		DD11111100000006DD111111 /* PhdDateParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdDateParser.swift; sourceTree = "<group>"; };
 		DD11111100000007DD111111 /* PhdProgramLinks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhdProgramLinks.swift; sourceTree = "<group>"; };
 		DD11111100000008DD111111 /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
+		F1000001F1000001F1000001 /* StudyQuestion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyQuestion.swift; sourceTree = "<group>"; };
+		F1000002F1000002F1000002 /* StudyTopic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTopic.swift; sourceTree = "<group>"; };
+		F1000003F1000003F1000003 /* StudyGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroup.swift; sourceTree = "<group>"; };
+		F1000004F1000004F1000004 /* StudyContent_CS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyContent_CS.swift; sourceTree = "<group>"; };
+		F1000005F1000005F1000005 /* StudyContent_ML.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyContent_ML.swift; sourceTree = "<group>"; };
+		F1000006F1000006F1000006 /* StudyContent_SystemAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyContent_SystemAnalysis.swift; sourceTree = "<group>"; };
+		F1000007F1000007F1000007 /* StudyContent_Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyContent_Math.swift; sourceTree = "<group>"; };
+		F1000008F1000008F1000008 /* StudyContent_English.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyContent_English.swift; sourceTree = "<group>"; };
+		F1000009F1000009F1000009 /* StudyContent_Philosophy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyContent_Philosophy.swift; sourceTree = "<group>"; };
+		F100000AF100000AF100000A /* StudyDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyDataProvider.swift; sourceTree = "<group>"; };
+		F100000BF100000BF100000B /* StudyTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTabView.swift; sourceTree = "<group>"; };
+		F100000CF100000CF100000C /* StudyProgramDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyProgramDetailView.swift; sourceTree = "<group>"; };
+		F100000DF100000DF100000D /* StudyGroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupDetailView.swift; sourceTree = "<group>"; };
+		F100000EF100000EF100000E /* StudyTopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTopicDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -318,6 +346,7 @@
 				AB1111110000000100000001 /* Rules */,
 				E9CE5A76AC4EF413D4DA0810 /* Settings */,
 				74F945F5901C5803E39068DE /* Statistics */,
+				E3000001E3000001E3000001 /* Study */,
 			);
 			path = Features;
 			sourceTree = "<group>";
@@ -427,6 +456,43 @@
 				FF1111110000000CFF111111 /* RulesViewModel.swift */,
 			);
 			path = Rules;
+			sourceTree = "<group>";
+		};
+		E3000002E3000002E3000002 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1000001F1000001F1000001 /* StudyQuestion.swift */,
+				F1000002F1000002F1000002 /* StudyTopic.swift */,
+				F1000003F1000003F1000003 /* StudyGroup.swift */,
+				F1000004F1000004F1000004 /* StudyContent_CS.swift */,
+				F1000005F1000005F1000005 /* StudyContent_ML.swift */,
+				F1000006F1000006F1000006 /* StudyContent_SystemAnalysis.swift */,
+				F1000007F1000007F1000007 /* StudyContent_Math.swift */,
+				F1000008F1000008F1000008 /* StudyContent_English.swift */,
+				F1000009F1000009F1000009 /* StudyContent_Philosophy.swift */,
+				F100000AF100000AF100000A /* StudyDataProvider.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E3000003E3000003E3000003 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F100000BF100000BF100000B /* StudyTabView.swift */,
+				F100000CF100000CF100000C /* StudyProgramDetailView.swift */,
+				F100000DF100000DF100000D /* StudyGroupDetailView.swift */,
+				F100000EF100000EF100000E /* StudyTopicDetailView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E3000001E3000001E3000001 /* Study */ = {
+			isa = PBXGroup;
+			children = (
+				E3000002E3000002E3000002 /* Models */,
+				E3000003E3000003E3000003 /* Views */,
+			);
+			path = Study;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -576,6 +642,20 @@
 				CC11111100000006CC111111 /* PhdDateParser.swift in Sources */,
 				CC11111100000007CC111111 /* PhdProgramLinks.swift in Sources */,
 				CC11111100000008CC111111 /* SafariView.swift in Sources */,
+				E1000001E1000001E1000001 /* StudyQuestion.swift in Sources */,
+				E1000002E1000002E1000002 /* StudyTopic.swift in Sources */,
+				E1000003E1000003E1000003 /* StudyGroup.swift in Sources */,
+				E1000004E1000004E1000004 /* StudyContent_CS.swift in Sources */,
+				E1000005E1000005E1000005 /* StudyContent_ML.swift in Sources */,
+				E1000006E1000006E1000006 /* StudyContent_SystemAnalysis.swift in Sources */,
+				E1000007E1000007E1000007 /* StudyContent_Math.swift in Sources */,
+				E1000008E1000008E1000008 /* StudyContent_English.swift in Sources */,
+				E1000009E1000009E1000009 /* StudyContent_Philosophy.swift in Sources */,
+				E100000AE100000AE100000A /* StudyDataProvider.swift in Sources */,
+				E100000BE100000BE100000B /* StudyTabView.swift in Sources */,
+				E100000CE100000CE100000C /* StudyProgramDetailView.swift in Sources */,
+				E100000DE100000DE100000D /* StudyGroupDetailView.swift in Sources */,
+				E100000EE100000EE100000E /* StudyTopicDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
