@@ -273,6 +273,68 @@ final class NotificationService {
         }
     }
 
+    // MARK: - Daily Goal Reminders (08:00 + 16:00)
+
+    private static let dailyGoalMorningIdPrefix = "daily_goal_morning_"
+    private static let dailyGoalAfternoonIdPrefix = "daily_goal_afternoon_"
+    private static let dailyGoalHorizonDays = 7
+
+    func rescheduleDailyGoalReminders(hasGoalsForToday: Bool) {
+        center.getPendingNotificationRequests { [center] requests in
+            let toRemove = requests
+                .map(\.identifier)
+                .filter { $0.hasPrefix(Self.dailyGoalMorningIdPrefix) || $0.hasPrefix(Self.dailyGoalAfternoonIdPrefix) }
+            if !toRemove.isEmpty {
+                center.removePendingNotificationRequests(withIdentifiers: toRemove)
+            }
+
+            let calendar = Calendar.current
+            let now = Date()
+
+            for offset in 0..<Self.dailyGoalHorizonDays {
+                guard let baseDate = calendar.date(byAdding: .day, value: offset, to: now) else { continue }
+                let goalsToday = offset == 0 ? hasGoalsForToday : false
+
+                if let morning = calendar.date(bySettingHour: 8, minute: 0, second: 0, of: baseDate), morning > now, !goalsToday {
+                    let content = UNMutableNotificationContent()
+                    content.title = "Поставь цели на день"
+                    content.body = "Доброе утро! Задай, что хочешь сделать сегодня."
+                    content.sound = .default
+
+                    let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: morning)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                    let request = UNNotificationRequest(
+                        identifier: Self.dailyGoalMorningIdPrefix + String(offset),
+                        content: content,
+                        trigger: trigger
+                    )
+                    center.add(request)
+                }
+
+                if let afternoon = calendar.date(bySettingHour: 16, minute: 0, second: 0, of: baseDate), afternoon > now {
+                    let content = UNMutableNotificationContent()
+                    if goalsToday {
+                        content.title = "Как прогресс по целям?"
+                        content.body = "Отметь, насколько продвинулся за сегодня."
+                    } else {
+                        content.title = "Цели на день не поставлены"
+                        content.body = "Ещё есть время — выдели пару минут и запиши цели."
+                    }
+                    content.sound = .default
+
+                    let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: afternoon)
+                    let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                    let request = UNNotificationRequest(
+                        identifier: Self.dailyGoalAfternoonIdPrefix + String(offset),
+                        content: content,
+                        trigger: trigger
+                    )
+                    center.add(request)
+                }
+            }
+        }
+    }
+
     // MARK: - Study Question Daily (09:00)
 
     private static let studyQuestionIdPrefix = "study_question_"

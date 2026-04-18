@@ -100,6 +100,7 @@
 		E100000CE100000CE100000C /* StudyProgramDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000CF100000CF100000C /* StudyProgramDetailView.swift */; };
 		E100000DE100000DE100000D /* StudyGroupDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000DF100000DF100000D /* StudyGroupDetailView.swift */; };
 		E100000EE100000EE100000E /* StudyTopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F100000EF100000EF100000E /* StudyTopicDetailView.swift */; };
+		E2000001E2000001E2000001 /* DailyGoalChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2000001F2000001F2000001 /* DailyGoalChecker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -197,6 +198,7 @@
 		F100000CF100000CF100000C /* StudyProgramDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyProgramDetailView.swift; sourceTree = "<group>"; };
 		F100000DF100000DF100000D /* StudyGroupDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyGroupDetailView.swift; sourceTree = "<group>"; };
 		F100000EF100000EF100000E /* StudyTopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyTopicDetailView.swift; sourceTree = "<group>"; };
+		F2000001F2000001F2000001 /* DailyGoalChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGoalChecker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -235,6 +237,7 @@
 				FF11111100000003FF111111 /* BackupCoordinator.swift */,
 				FF11111100000004FF111111 /* BackupFileManager.swift */,
 				FF11111100000005FF111111 /* BackupScheduler.swift */,
+				F2000001F2000001F2000001 /* DailyGoalChecker.swift */,
 				EA951FE4B751CAAEF62FCA92 /* DataExportService.swift */,
 				DB467A1B598BEB6F84F31457 /* DateHelper.swift */,
 				DD11111100000001DD111111 /* InstallTracker.swift */,
@@ -656,6 +659,7 @@
 				E100000CE100000CE100000C /* StudyProgramDetailView.swift in Sources */,
 				E100000DE100000DE100000D /* StudyGroupDetailView.swift in Sources */,
 				E100000EE100000EE100000E /* StudyTopicDetailView.swift in Sources */,
+				E2000001E2000001E2000001 /* DailyGoalChecker.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
