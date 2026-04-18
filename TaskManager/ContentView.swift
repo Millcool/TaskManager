@@ -64,6 +64,11 @@ struct MainTabView: View {
                     Label("Проекты", systemImage: "folder.fill")
                 }
 
+            StudyTabView()
+                .tabItem {
+                    Label("Учеба", systemImage: "books.vertical.fill")
+                }
+
             StatisticsTabView()
                 .tabItem {
                     Label("Статистика", systemImage: "chart.bar.fill")
