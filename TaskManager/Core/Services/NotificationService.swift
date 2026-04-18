@@ -273,6 +273,59 @@ final class NotificationService {
         }
     }
 
+    // MARK: - Study Question Daily (09:00)
+
+    private static let studyQuestionIdPrefix = "study_question_"
+    private static let studyQuestionHorizonDays = 30
+
+    func rescheduleDailyStudyQuestionNotifications(groups: [StudyGroup] = StudyDataProvider.allGroups) {
+        center.getPendingNotificationRequests { [center] requests in
+            let toRemove = requests
+                .map(\.identifier)
+                .filter { $0.hasPrefix(Self.studyQuestionIdPrefix) }
+            if !toRemove.isEmpty {
+                center.removePendingNotificationRequests(withIdentifiers: toRemove)
+            }
+
+            let pool: [(group: StudyGroup, topic: StudyTopic, question: StudyQuestion)] = groups.flatMap { group in
+                group.topics.flatMap { topic in
+                    topic.questions.map { (group, topic, $0) }
+                }
+            }
+            guard !pool.isEmpty else { return }
+
+            let calendar = Calendar.current
+            let now = Date()
+
+            for offset in 0..<Self.studyQuestionHorizonDays {
+                guard let baseDate = calendar.date(byAdding: .day, value: offset, to: now),
+                      let triggerDate = calendar.date(bySettingHour: 9, minute: 0, second: 0, of: baseDate),
+                      triggerDate > now,
+                      let pick = pool.randomElement() else { continue }
+
+                let content = UNMutableNotificationContent()
+                content.title = pick.question.question
+                content.subtitle = "\(pick.group.title) · \(pick.topic.title)"
+                content.body = pick.question.answer
+                content.sound = .default
+                content.userInfo = [
+                    "studyQuestionId": pick.question.id.uuidString,
+                    "studyTopicId": pick.topic.id.uuidString,
+                    "studyGroupId": pick.group.id.uuidString
+                ]
+
+                let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: triggerDate)
+                let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
+                let request = UNNotificationRequest(
+                    identifier: Self.studyQuestionIdPrefix + String(offset),
+                    content: content,
+                    trigger: trigger
+                )
+                center.add(request)
+            }
+        }
+    }
+
     private static func russianDayWord(_ n: Int) -> String {
         let lastTwo = abs(n) % 100
         if (11...14).contains(lastTwo) { return "дней" }
