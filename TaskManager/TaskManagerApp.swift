@@ -33,6 +33,9 @@ struct TaskManagerApp: App {
             programs: PhdProgramsDataProvider.programs
         )
         NotificationService.shared.rescheduleDailyStudyQuestionNotifications()
+        NotificationService.shared.rescheduleDailyGoalReminders(
+            hasGoalsForToday: DailyGoalChecker.hasDailyGoals(on: Date(), container: container)
+        )
     }
 
     private var colorScheme: ColorScheme? {
@@ -57,6 +60,9 @@ struct TaskManagerApp: App {
                 Task { @MainActor in
                     await BackupScheduler.runIfDue(container: container)
                 }
+                NotificationService.shared.rescheduleDailyGoalReminders(
+                    hasGoalsForToday: DailyGoalChecker.hasDailyGoals(on: Date(), container: container)
+                )
             default:
                 break
             }
