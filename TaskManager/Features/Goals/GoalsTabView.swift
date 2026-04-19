@@ -35,8 +35,13 @@ struct GoalsTabView: View {
                 )
                 .padding(.vertical, 12)
 
+                // Category filter chips
+                if !viewModel.allCategories.isEmpty {
+                    categoryFilterBar
+                }
+
                 // Goals list
-                if viewModel.goals.isEmpty {
+                if viewModel.displayedGoals.isEmpty {
                     Spacer()
                     EmptyStateView(
                         icon: "target",
@@ -47,7 +52,7 @@ struct GoalsTabView: View {
                 } else {
                     ScrollView {
                         LazyVStack(spacing: 8) {
-                            ForEach(Array(viewModel.goals.enumerated()), id: \.element.id) { index, goal in
+                            ForEach(Array(viewModel.displayedGoals.enumerated()), id: \.element.id) { index, goal in
                                 NavigationLink(destination: GoalDetailView(goal: goal, viewModel: viewModel)) {
                                     GoalRowView(
                                         goal: goal,
@@ -96,7 +101,7 @@ struct GoalsTabView: View {
                                     } label: {
                                         Label("Переместить ниже", systemImage: "arrow.down")
                                     }
-                                    .disabled(index == viewModel.goals.count - 1)
+                                    .disabled(index == viewModel.displayedGoals.count - 1)
 
                                     Divider()
 
@@ -192,12 +197,63 @@ struct GoalsTabView: View {
                     }
                 }
             }
-            .sheet(isPresented: $showAddSheet) {
+            .sheet(isPresented: $showAddSheet, onDismiss: {
+                viewModel.fetchCategories()
+            }) {
                 GoalFormView(mode: .create, viewModel: viewModel)
             }
             .onAppear {
                 viewModel.setup(modelContext: modelContext)
             }
         }
+    }
+
+    private var categoryFilterBar: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                categoryChip(
+                    title: "Все",
+                    colorHex: nil,
+                    isSelected: viewModel.selectedCategoryIds.isEmpty,
+                    action: { viewModel.clearCategoryFilter() }
+                )
+                ForEach(viewModel.allCategories, id: \.id) { category in
+                    categoryChip(
+                        title: category.name,
+                        colorHex: category.colorHex,
+                        isSelected: viewModel.selectedCategoryIds.contains(category.id),
+                        action: { viewModel.toggleCategoryFilter(category.id) }
+                    )
+                }
+            }
+            .padding(.horizontal, AppTheme.horizontalPadding)
+        }
+        .padding(.bottom, 8)
+    }
+
+    private func categoryChip(title: String, colorHex: String?, isSelected: Bool, action: @escaping () -> Void) -> some View {
+        let tint = colorHex.map { Color(hex: $0) } ?? AppColors.accent
+        return Button(action: action) {
+            HStack(spacing: 6) {
+                if let colorHex {
+                    Circle()
+                        .fill(Color(hex: colorHex))
+                        .frame(width: 8, height: 8)
+                }
+                Text(title)
+                    .font(.subheadline)
+                    .fontWeight(.medium)
+            }
+            .padding(.horizontal, 12)
+            .padding(.vertical, 6)
+            .background(isSelected ? tint.opacity(0.25) : AppColors.cardBackground)
+            .foregroundStyle(isSelected ? tint : AppColors.textSecondary)
+            .clipShape(Capsule())
+            .overlay(
+                Capsule()
+                    .stroke(isSelected ? tint : Color.clear, lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
     }
 }
