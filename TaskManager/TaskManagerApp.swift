@@ -22,6 +22,7 @@ struct TaskManagerApp: App {
         }
 
         BackupScheduler.register(modelContainer: container)
+        NotificationService.shared.requestPermissionIfNeeded()
         InstallTracker.scheduleExpirationNotification()
         NotificationService.shared.reschedulePhdApplicationStartNotifications(
             programs: PhdProgramsDataProvider.programs

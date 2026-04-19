@@ -17,6 +17,14 @@ final class NotificationService {
         }
     }
 
+    func requestPermissionIfNeeded() {
+        Task {
+            let settings = await center.notificationSettings()
+            guard settings.authorizationStatus == .notDetermined else { return }
+            _ = await requestPermission()
+        }
+    }
+
     // MARK: - System Notifications
 
     func rescheduleAllSystemNotifications() {
