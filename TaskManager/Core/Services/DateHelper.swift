@@ -45,15 +45,19 @@ enum DateHelper {
         switch period {
         case .day:
             let cal = calendar
+            let weekdayFmt = DateFormatter()
+            weekdayFmt.locale = Locale(identifier: "ru_RU")
+            weekdayFmt.dateFormat = "EEEE"
+            let weekday = weekdayFmt.string(from: date)
             if cal.isDateInToday(date) {
-                return "Сегодня"
+                return "Сегодня, \(weekday)"
             } else if cal.isDateInYesterday(date) {
-                return "Вчера"
+                return "Вчера, \(weekday)"
             } else if cal.isDateInTomorrow(date) {
-                return "Завтра"
+                return "Завтра, \(weekday)"
             }
             formatter.dateFormat = "d MMMM yyyy"
-            return formatter.string(from: date)
+            return "\(formatter.string(from: date)), \(weekday)"
 
         case .week:
             let start = date.startOfWeek
