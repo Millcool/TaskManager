@@ -5,6 +5,7 @@ struct GoalsTabView: View {
     @Environment(\.modelContext) private var modelContext
     @State private var viewModel = GoalsViewModel()
     @State private var showAddSheet = false
+    @State private var showFilterSheet = false
 
     var body: some View {
         NavigationStack {
@@ -34,11 +35,6 @@ struct GoalsTabView: View {
                     onToday: { viewModel.goToToday() }
                 )
                 .padding(.vertical, 12)
-
-                // Category filter chips
-                if !viewModel.allCategories.isEmpty {
-                    categoryFilterBar
-                }
 
                 // Goals list
                 if viewModel.displayedGoals.isEmpty {
@@ -187,6 +183,28 @@ struct GoalsTabView: View {
             .navigationTitle("Цели")
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
+                ToolbarItem(placement: .topBarLeading) {
+                    Button {
+                        showFilterSheet = true
+                    } label: {
+                        ZStack(alignment: .topTrailing) {
+                            Image(systemName: "line.3.horizontal.decrease.circle")
+                                .fontWeight(.semibold)
+                                .foregroundStyle(AppColors.accent)
+                            if !viewModel.selectedCategoryIds.isEmpty {
+                                Text("\(viewModel.selectedCategoryIds.count)")
+                                    .font(.system(size: 10, weight: .bold))
+                                    .foregroundStyle(.white)
+                                    .padding(.horizontal, 4)
+                                    .padding(.vertical, 1)
+                                    .background(AppColors.red)
+                                    .clipShape(Capsule())
+                                    .offset(x: 6, y: -6)
+                            }
+                        }
+                    }
+                    .disabled(viewModel.allCategories.isEmpty)
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
                         showAddSheet = true
@@ -202,58 +220,13 @@ struct GoalsTabView: View {
             }) {
                 GoalFormView(mode: .create, viewModel: viewModel)
             }
+            .sheet(isPresented: $showFilterSheet) {
+                CategoryFilterSheet(viewModel: viewModel)
+            }
             .onAppear {
                 viewModel.setup(modelContext: modelContext)
             }
         }
     }
 
-    private var categoryFilterBar: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 8) {
-                categoryChip(
-                    title: "Все",
-                    colorHex: nil,
-                    isSelected: viewModel.selectedCategoryIds.isEmpty,
-                    action: { viewModel.clearCategoryFilter() }
-                )
-                ForEach(viewModel.allCategories, id: \.id) { category in
-                    categoryChip(
-                        title: category.name,
-                        colorHex: category.colorHex,
-                        isSelected: viewModel.selectedCategoryIds.contains(category.id),
-                        action: { viewModel.toggleCategoryFilter(category.id) }
-                    )
-                }
-            }
-            .padding(.horizontal, AppTheme.horizontalPadding)
-        }
-        .padding(.bottom, 8)
-    }
-
-    private func categoryChip(title: String, colorHex: String?, isSelected: Bool, action: @escaping () -> Void) -> some View {
-        let tint = colorHex.map { Color(hex: $0) } ?? AppColors.accent
-        return Button(action: action) {
-            HStack(spacing: 6) {
-                if let colorHex {
-                    Circle()
-                        .fill(Color(hex: colorHex))
-                        .frame(width: 8, height: 8)
-                }
-                Text(title)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-            }
-            .padding(.horizontal, 12)
-            .padding(.vertical, 6)
-            .background(isSelected ? tint.opacity(0.25) : AppColors.cardBackground)
-            .foregroundStyle(isSelected ? tint : AppColors.textSecondary)
-            .clipShape(Capsule())
-            .overlay(
-                Capsule()
-                    .stroke(isSelected ? tint : Color.clear, lineWidth: 1)
-            )
-        }
-        .buttonStyle(.plain)
-    }
 }
