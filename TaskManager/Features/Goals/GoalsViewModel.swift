@@ -31,9 +31,37 @@ final class GoalsViewModel {
     var selectedPeriod: GoalPeriod = .day
     var currentDate: Date = Date()
     var goals: [Goal] = []
+    var allCategories: [Category] = []
+    var selectedCategoryIds: Set<UUID> = []
     var availableParents: [Goal] = []
     var showUndoSnackbar: Bool = false
     var deletedGoalName: String = ""
+
+    var displayedGoals: [Goal] {
+        guard !selectedCategoryIds.isEmpty else { return goals }
+        return goals.filter { goal in
+            guard let id = goal.category?.id else { return false }
+            return selectedCategoryIds.contains(id)
+        }
+    }
+
+    func fetchCategories() {
+        guard let modelContext else { return }
+        let descriptor = FetchDescriptor<Category>(sortBy: [SortDescriptor(\.name)])
+        allCategories = (try? modelContext.fetch(descriptor)) ?? []
+    }
+
+    func toggleCategoryFilter(_ id: UUID) {
+        if selectedCategoryIds.contains(id) {
+            selectedCategoryIds.remove(id)
+        } else {
+            selectedCategoryIds.insert(id)
+        }
+    }
+
+    func clearCategoryFilter() {
+        selectedCategoryIds.removeAll()
+    }
 
     private var modelContext: ModelContext?
     private var deletedGoalData: DeletedGoalData?
@@ -45,6 +73,7 @@ final class GoalsViewModel {
 
     func setup(modelContext: ModelContext) {
         self.modelContext = modelContext
+        fetchCategories()
         fetchGoals()
     }
 
