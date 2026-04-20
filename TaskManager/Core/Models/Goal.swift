@@ -14,6 +14,7 @@ final class Goal {
     var createdAt: Date = Date()
     var updatedAt: Date = Date()
     var sortOrder: Int = 0
+    var estimatedMinutes: Int? = nil
 
     var category: Category?
 
@@ -53,7 +54,8 @@ final class Goal {
         colorHex: String = "#8B5CF6",
         category: Category? = nil,
         parent: Goal? = nil,
-        sortOrder: Int = 0
+        sortOrder: Int = 0,
+        estimatedMinutes: Int? = nil
     ) {
         self.id = UUID()
         self.name = name
@@ -66,6 +68,7 @@ final class Goal {
         self.category = category
         self.parent = parent
         self.sortOrder = sortOrder
+        self.estimatedMinutes = estimatedMinutes
         self.createdAt = Date()
         self.updatedAt = Date()
     }

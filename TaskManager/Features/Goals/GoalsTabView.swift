@@ -46,124 +46,7 @@ struct GoalsTabView: View {
                     )
                     Spacer()
                 } else {
-                    ScrollView {
-                        LazyVStack(spacing: 8) {
-                            ForEach(Array(viewModel.displayedGoals.enumerated()), id: \.element.id) { index, goal in
-                                NavigationLink(destination: GoalDetailView(goal: goal, viewModel: viewModel)) {
-                                    GoalRowView(
-                                        goal: goal,
-                                        isTaskOfTheDay: index == 0 && viewModel.selectedPeriod == .day
-                                    )
-                                }
-                                .buttonStyle(.plain)
-                                .contextMenu {
-                                    if goal.status != .completed {
-                                        Button {
-                                            viewModel.setStatus(goal, status: .completed)
-                                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                        } label: {
-                                            Label("Выполнена", systemImage: "checkmark.circle")
-                                        }
-                                    }
-
-                                    if goal.status != .failed {
-                                        Button {
-                                            viewModel.setStatus(goal, status: .failed)
-                                            UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                        } label: {
-                                            Label("Не выполнена", systemImage: "xmark.circle")
-                                        }
-                                    }
-
-                                    if goal.status != .new {
-                                        Button {
-                                            viewModel.setStatus(goal, status: .new)
-                                        } label: {
-                                            Label("Сбросить", systemImage: "arrow.uturn.backward")
-                                        }
-                                    }
-
-                                    Divider()
-
-                                    Button {
-                                        viewModel.moveGoalUp(goal)
-                                    } label: {
-                                        Label("Переместить выше", systemImage: "arrow.up")
-                                    }
-                                    .disabled(index == 0)
-
-                                    Button {
-                                        viewModel.moveGoalDown(goal)
-                                    } label: {
-                                        Label("Переместить ниже", systemImage: "arrow.down")
-                                    }
-                                    .disabled(index == viewModel.displayedGoals.count - 1)
-
-                                    Divider()
-
-                                    Button {
-                                        viewModel.moveToPreviousPeriod(goal)
-                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                    } label: {
-                                        Label("На предыдущий период", systemImage: "arrow.left.to.line")
-                                    }
-
-                                    Button {
-                                        viewModel.moveToNextPeriod(goal)
-                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                    } label: {
-                                        Label("На следующий период", systemImage: "arrow.right.to.line")
-                                    }
-
-                                    Divider()
-
-                                    Button(role: .destructive) {
-                                        viewModel.deleteGoal(goal)
-                                    } label: {
-                                        Label("Удалить", systemImage: "trash")
-                                    }
-                                }
-                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
-                                    Button(role: .destructive) {
-                                        viewModel.deleteGoal(goal)
-                                    } label: {
-                                        Label("Удалить", systemImage: "trash")
-                                    }
-
-                                    Button {
-                                        viewModel.moveToNextPeriod(goal)
-                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                    } label: {
-                                        Label("Перенести", systemImage: "arrow.right")
-                                    }
-                                    .tint(AppColors.accent)
-                                }
-                                .swipeActions(edge: .leading, allowsFullSwipe: true) {
-                                    Button {
-                                        let newStatus: GoalStatus = goal.status == .completed ? .new : .completed
-                                        viewModel.setStatus(goal, status: newStatus)
-                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                    } label: {
-                                        Label(
-                                            goal.status == .completed ? "Сбросить" : "Выполнена",
-                                            systemImage: goal.status == .completed ? "arrow.uturn.backward" : "checkmark.circle"
-                                        )
-                                    }
-                                    .tint(goal.status == .completed ? AppColors.neutral : AppColors.green)
-
-                                    Button {
-                                        viewModel.moveToPreviousPeriod(goal)
-                                        UIImpactFeedbackGenerator(style: .medium).impactOccurred()
-                                    } label: {
-                                        Label("Назад", systemImage: "arrow.left")
-                                    }
-                                    .tint(AppColors.accent)
-                                }
-                            }
-                        }
-                        .padding(.horizontal, AppTheme.horizontalPadding)
-                        .padding(.bottom, 20)
-                    }
+                    goalsList
                 }
             }
             .background(AppColors.background)
@@ -229,4 +112,142 @@ struct GoalsTabView: View {
         }
     }
 
+    private var goalsList: some View {
+        List {
+            ForEach(viewModel.displayedGoals, id: \.id) { goal in
+                goalRow(goal: goal)
+                    .listRowSeparator(.hidden)
+                    .listRowBackground(Color.clear)
+                    .listRowInsets(EdgeInsets(
+                        top: 4,
+                        leading: AppTheme.horizontalPadding,
+                        bottom: 4,
+                        trailing: AppTheme.horizontalPadding
+                    ))
+            }
+            .onMove { source, destination in
+                viewModel.reorderDisplayedGoals(from: source, to: destination)
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            }
+        }
+        .listStyle(.plain)
+        .scrollContentBackground(.hidden)
+        .background(AppColors.background)
+        .environment(\.defaultMinListRowHeight, 0)
+    }
+
+    @ViewBuilder
+    private func goalRow(goal: Goal) -> some View {
+        let index = viewModel.displayedGoals.firstIndex(where: { $0.id == goal.id }) ?? 0
+        NavigationLink(destination: GoalDetailView(goal: goal, viewModel: viewModel)) {
+            GoalRowView(
+                goal: goal,
+                isTaskOfTheDay: index == 0 && viewModel.selectedPeriod == .day
+            )
+        }
+        .buttonStyle(.plain)
+        .contextMenu {
+            if goal.status != .completed {
+                Button {
+                    viewModel.setStatus(goal, status: .completed)
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                } label: {
+                    Label("Выполнена", systemImage: "checkmark.circle")
+                }
+            }
+
+            if goal.status != .failed {
+                Button {
+                    viewModel.setStatus(goal, status: .failed)
+                    UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+                } label: {
+                    Label("Не выполнена", systemImage: "xmark.circle")
+                }
+            }
+
+            if goal.status != .new {
+                Button {
+                    viewModel.setStatus(goal, status: .new)
+                } label: {
+                    Label("Сбросить", systemImage: "arrow.uturn.backward")
+                }
+            }
+
+            Divider()
+
+            Button {
+                viewModel.moveGoalUp(goal)
+            } label: {
+                Label("Переместить выше", systemImage: "arrow.up")
+            }
+            .disabled(index == 0)
+
+            Button {
+                viewModel.moveGoalDown(goal)
+            } label: {
+                Label("Переместить ниже", systemImage: "arrow.down")
+            }
+            .disabled(index == viewModel.displayedGoals.count - 1)
+
+            Divider()
+
+            Button {
+                viewModel.moveToPreviousPeriod(goal)
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            } label: {
+                Label("На предыдущий период", systemImage: "arrow.left.to.line")
+            }
+
+            Button {
+                viewModel.moveToNextPeriod(goal)
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            } label: {
+                Label("На следующий период", systemImage: "arrow.right.to.line")
+            }
+
+            Divider()
+
+            Button(role: .destructive) {
+                viewModel.deleteGoal(goal)
+            } label: {
+                Label("Удалить", systemImage: "trash")
+            }
+        }
+        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+            Button(role: .destructive) {
+                viewModel.deleteGoal(goal)
+            } label: {
+                Label("Удалить", systemImage: "trash")
+            }
+
+            Button {
+                viewModel.moveToNextPeriod(goal)
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            } label: {
+                Label("Перенести", systemImage: "arrow.right")
+            }
+            .tint(AppColors.accent)
+        }
+        .swipeActions(edge: .leading, allowsFullSwipe: true) {
+            Button {
+                let newStatus: GoalStatus = goal.status == .completed ? .new : .completed
+                viewModel.setStatus(goal, status: newStatus)
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            } label: {
+                Label(
+                    goal.status == .completed ? "Сбросить" : "Выполнена",
+                    systemImage: goal.status == .completed ? "arrow.uturn.backward" : "checkmark.circle"
+                )
+            }
+            .tint(goal.status == .completed ? AppColors.neutral : AppColors.green)
+
+            Button {
+                viewModel.moveToPreviousPeriod(goal)
+                UIImpactFeedbackGenerator(style: .medium).impactOccurred()
+            } label: {
+                Label("Назад", systemImage: "arrow.left")
+            }
+            .tint(AppColors.accent)
+        }
+    }
 }
