@@ -22,8 +22,15 @@ struct GoalFormView: View {
     @State private var selectedParent: Goal?
     @State private var hasReminder = false
     @State private var reminderDate = Date()
+    @State private var estimatedMinutes: Int?
 
     @State private var categories: [Category] = []
+
+    private let estimatePresets: [(label: String, minutes: Int)] = [
+        ("15 мин", 15),
+        ("1 ч", 60),
+        ("4 ч", 240)
+    ]
 
     private var isEditing: Bool {
         if case .edit = mode { return true }
@@ -93,6 +100,18 @@ struct GoalFormView: View {
                             }
                         }
                         .pickerStyle(.segmented)
+                    }
+
+                    // Estimated time
+                    VStack(alignment: .leading, spacing: 6) {
+                        Text("Примерное время")
+                            .font(.subheadline)
+                            .foregroundStyle(AppColors.textSecondary)
+                        HStack(spacing: 8) {
+                            ForEach(estimatePresets, id: \.minutes) { preset in
+                                estimateChip(label: preset.label, minutes: preset.minutes)
+                            }
+                        }
                     }
 
                     // Color
@@ -213,6 +232,28 @@ struct GoalFormView: View {
         }
     }
 
+    private func estimateChip(label: String, minutes: Int) -> some View {
+        let isSelected = estimatedMinutes == minutes
+        return Button {
+            UIImpactFeedbackGenerator(style: .light).impactOccurred()
+            estimatedMinutes = isSelected ? nil : minutes
+        } label: {
+            Text(label)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+                .background(isSelected ? AppColors.accent.opacity(0.25) : AppColors.cardBackground)
+                .foregroundStyle(isSelected ? AppColors.accent : AppColors.textSecondary)
+                .clipShape(RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius))
+                .overlay(
+                    RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius)
+                        .stroke(isSelected ? AppColors.accent : Color.clear, lineWidth: 1)
+                )
+        }
+        .buttonStyle(.plain)
+    }
+
     private func loadData() {
         // Load categories
         let descriptor = FetchDescriptor<Category>(sortBy: [SortDescriptor(\.name)])
@@ -232,6 +273,7 @@ struct GoalFormView: View {
             colorHex = goal.colorHex
             selectedCategory = goal.category
             selectedParent = goal.parent
+            estimatedMinutes = goal.estimatedMinutes
             viewModel.fetchAvailableParents(for: goal.period, excluding: goal.id)
 
             if let reminder = goal.reminders?.first {
@@ -257,7 +299,8 @@ struct GoalFormView: View {
                 colorHex: colorHex,
                 category: selectedCategory,
                 parent: selectedParent,
-                reminderDate: hasReminder ? reminderDate : nil
+                reminderDate: hasReminder ? reminderDate : nil,
+                estimatedMinutes: estimatedMinutes
             )
         case .edit(let goal):
             viewModel.updateGoal(
@@ -268,7 +311,8 @@ struct GoalFormView: View {
                 colorHex: colorHex,
                 category: selectedCategory,
                 parent: selectedParent,
-                reminderDate: hasReminder ? reminderDate : nil
+                reminderDate: hasReminder ? reminderDate : nil,
+                estimatedMinutes: estimatedMinutes
             )
         }
 

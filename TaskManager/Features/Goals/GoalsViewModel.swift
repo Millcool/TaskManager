@@ -10,6 +10,7 @@ struct DeletedGoalData {
     let priorityRaw: String
     let colorHex: String
     let sortOrder: Int
+    let estimatedMinutes: Int?
     let categoryId: UUID?
     let parentId: UUID?
 
@@ -21,6 +22,7 @@ struct DeletedGoalData {
         self.priorityRaw = goal.priorityRaw
         self.colorHex = goal.colorHex
         self.sortOrder = goal.sortOrder
+        self.estimatedMinutes = goal.estimatedMinutes
         self.categoryId = goal.category?.id
         self.parentId = goal.parent?.id
     }
@@ -199,7 +201,8 @@ final class GoalsViewModel {
             periodStartDate: data.periodStartDate,
             priority: GoalPriority(rawValue: data.priorityRaw) ?? .medium,
             colorHex: data.colorHex,
-            sortOrder: data.sortOrder
+            sortOrder: data.sortOrder,
+            estimatedMinutes: data.estimatedMinutes
         )
 
         if let categoryId = data.categoryId {
@@ -236,6 +239,20 @@ final class GoalsViewModel {
     }
 
     // MARK: - Reorder
+
+    func reorderDisplayedGoals(from source: IndexSet, to destination: Int) {
+        var items = displayedGoals
+        items.move(fromOffsets: source, toOffset: destination)
+        let now = Date()
+        for (idx, goal) in items.enumerated() {
+            if goal.sortOrder != idx {
+                goal.sortOrder = idx
+                goal.updatedAt = now
+            }
+        }
+        try? modelContext?.save()
+        fetchGoals()
+    }
 
     func moveGoalUp(_ goal: Goal) {
         guard let index = goals.firstIndex(where: { $0.id == goal.id }), index > 0 else { return }
@@ -311,7 +328,8 @@ final class GoalsViewModel {
         colorHex: String,
         category: Category?,
         parent: Goal?,
-        reminderDate: Date?
+        reminderDate: Date?,
+        estimatedMinutes: Int?
     ) {
         let startDate = DateHelper.periodStartDate(for: currentDate, period: period)
         let nextSortOrder = (goals.map(\.sortOrder).max() ?? -1) + 1
@@ -324,7 +342,8 @@ final class GoalsViewModel {
             colorHex: colorHex,
             category: category,
             parent: parent,
-            sortOrder: nextSortOrder
+            sortOrder: nextSortOrder,
+            estimatedMinutes: estimatedMinutes
         )
         modelContext?.insert(goal)
 
@@ -346,7 +365,8 @@ final class GoalsViewModel {
         colorHex: String,
         category: Category?,
         parent: Goal?,
-        reminderDate: Date?
+        reminderDate: Date?,
+        estimatedMinutes: Int?
     ) {
         goal.name = name
         goal.goalDescription = description
@@ -354,6 +374,7 @@ final class GoalsViewModel {
         goal.colorHex = colorHex
         goal.category = category
         goal.parent = parent
+        goal.estimatedMinutes = estimatedMinutes
         goal.updatedAt = Date()
 
         // Update reminders
