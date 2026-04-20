@@ -103,6 +103,8 @@
 		E2000001E2000001E2000001 /* DailyGoalChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2000001F2000001F2000001 /* DailyGoalChecker.swift */; };
 		E2000002E2000002E2000002 /* DailyGoalsRequiredView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2000002F2000002F2000002 /* DailyGoalsRequiredView.swift */; };
 		E2000003E2000003E2000003 /* CategoryFilterSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2000003F2000003F2000003 /* CategoryFilterSheet.swift */; };
+		E2000004E2000004E2000004 /* NotificationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2000004F2000004F2000004 /* NotificationCoordinator.swift */; };
+		E2000005E2000005E2000005 /* StudyQuestionPreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2000005F2000005F2000005 /* StudyQuestionPreviewView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -203,6 +205,8 @@
 		F2000001F2000001F2000001 /* DailyGoalChecker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGoalChecker.swift; sourceTree = "<group>"; };
 		F2000002F2000002F2000002 /* DailyGoalsRequiredView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyGoalsRequiredView.swift; sourceTree = "<group>"; };
 		F2000003F2000003F2000003 /* CategoryFilterSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryFilterSheet.swift; sourceTree = "<group>"; };
+		F2000004F2000004F2000004 /* NotificationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCoordinator.swift; sourceTree = "<group>"; };
+		F2000005F2000005F2000005 /* StudyQuestionPreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudyQuestionPreviewView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -246,6 +250,7 @@
 				DB467A1B598BEB6F84F31457 /* DateHelper.swift */,
 				DD11111100000001DD111111 /* InstallTracker.swift */,
 				FF11111100000006FF111111 /* KeychainHelper.swift */,
+				F2000004F2000004F2000004 /* NotificationCoordinator.swift */,
 				07E6C653CAC13FCF7CD1F03D /* NotificationService.swift */,
 				DD11111100000005DD111111 /* PhdApplicationStore.swift */,
 				DD11111100000006DD111111 /* PhdDateParser.swift */,
@@ -491,6 +496,7 @@
 				F100000CF100000CF100000C /* StudyProgramDetailView.swift */,
 				F100000DF100000DF100000D /* StudyGroupDetailView.swift */,
 				F100000EF100000EF100000E /* StudyTopicDetailView.swift */,
+				F2000005F2000005F2000005 /* StudyQuestionPreviewView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -668,6 +674,8 @@
 				E2000001E2000001E2000001 /* DailyGoalChecker.swift in Sources */,
 				E2000002E2000002E2000002 /* DailyGoalsRequiredView.swift in Sources */,
 				E2000003E2000003E2000003 /* CategoryFilterSheet.swift in Sources */,
+				E2000004E2000004E2000004 /* NotificationCoordinator.swift in Sources */,
+				E2000005E2000005E2000005 /* StudyQuestionPreviewView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
