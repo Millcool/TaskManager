@@ -48,6 +48,7 @@ struct ContentView: View {
 
 struct MainTabView: View {
     @Query private var todayGoals: [Goal]
+    @State private var notificationCoordinator = NotificationCoordinator.shared
 
     init() {
         let calendar = Calendar.current
@@ -95,6 +96,9 @@ struct MainTabView: View {
         .fullScreenCover(isPresented: .constant(todayGoals.isEmpty)) {
             DailyGoalsRequiredView()
                 .interactiveDismissDisabled(true)
+        }
+        .sheet(item: Bindable(notificationCoordinator).pendingStudyQuestion) { preview in
+            StudyQuestionPreviewView(preview: preview)
         }
     }
 }

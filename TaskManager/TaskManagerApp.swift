@@ -1,5 +1,6 @@
 import SwiftUI
 import SwiftData
+import UserNotifications
 
 @main
 struct TaskManagerApp: App {
@@ -22,6 +23,7 @@ struct TaskManagerApp: App {
         }
 
         BackupScheduler.register(modelContainer: container)
+        UNUserNotificationCenter.current().delegate = NotificationCoordinator.shared
         NotificationService.shared.requestPermissionIfNeeded()
         InstallTracker.scheduleExpirationNotification()
         NotificationService.shared.reschedulePhdApplicationStartNotifications(

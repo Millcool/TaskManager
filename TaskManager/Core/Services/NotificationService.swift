@@ -378,11 +378,16 @@ final class NotificationService {
                 content.subtitle = "\(pick.group.title) · \(pick.topic.title)"
                 content.body = pick.question.answer
                 content.sound = .default
-                content.userInfo = [
-                    "studyQuestionId": pick.question.id.uuidString,
-                    "studyTopicId": pick.topic.id.uuidString,
-                    "studyGroupId": pick.group.id.uuidString
+                var userInfo: [String: Any] = [
+                    "type": "study_question",
+                    "studyQuestionText": pick.question.question,
+                    "studyAnswer": pick.question.answer,
+                    "studyContext": "\(pick.group.title) · \(pick.topic.title)"
                 ]
+                if let examples = pick.question.examples {
+                    userInfo["studyExamples"] = examples
+                }
+                content.userInfo = userInfo
 
                 let components = calendar.dateComponents([.year, .month, .day, .hour, .minute], from: triggerDate)
                 let trigger = UNCalendarNotificationTrigger(dateMatching: components, repeats: false)
