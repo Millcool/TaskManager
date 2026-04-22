@@ -53,6 +53,13 @@ struct DailyGoalsRequiredView: View {
             }
             .padding(.top, 32)
         }
+        .onAppear {
+            if todayGoals.isEmpty {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                    nameFocused = true
+                }
+            }
+        }
     }
 
     private var header: some View {
@@ -99,11 +106,10 @@ struct DailyGoalsRequiredView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding(.vertical, 12)
-                .background(trimmedName.isEmpty ? AppColors.neutral.opacity(0.3) : AppColors.accent)
-                .foregroundStyle(.white)
+                .background(trimmedName.isEmpty ? AppColors.neutral.opacity(0.35) : AppColors.accent)
+                .foregroundStyle(.white.opacity(trimmedName.isEmpty ? 0.6 : 1))
                 .clipShape(RoundedRectangle(cornerRadius: AppTheme.smallCornerRadius))
             }
-            .disabled(trimmedName.isEmpty)
         }
         .padding(14)
         .background(AppColors.cardBackground.opacity(0.6))
@@ -160,7 +166,11 @@ struct DailyGoalsRequiredView: View {
 
     private func addGoal() {
         let name = trimmedName
-        guard !name.isEmpty else { return }
+        guard !name.isEmpty else {
+            nameFocused = true
+            UINotificationFeedbackGenerator().notificationOccurred(.warning)
+            return
+        }
         let start = Calendar.current.startOfDay(for: Date())
         let nextSortOrder = (todayGoals.map(\.sortOrder).max() ?? -1) + 1
         let goal = Goal(
