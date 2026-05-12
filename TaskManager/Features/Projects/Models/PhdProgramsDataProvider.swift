@@ -19,6 +19,7 @@ enum PhdProgramsDataProvider {
     private static let misisId = UUID(uuidString: "A0000011-0000-0000-0000-000000000011")!
     private static let finunivId = UUID(uuidString: "A0000012-0000-0000-0000-000000000012")!
     private static let ranId = UUID(uuidString: "A0000013-0000-0000-0000-000000000013")!
+    private static let sglaId = UUID(uuidString: "A000001A-0000-0000-0000-00000000001A")!
 
     // MARK: - University IDs — Санкт-Петербург
 
@@ -52,6 +53,7 @@ enum PhdProgramsDataProvider {
         University(id: misisId, name: "Национальный исследовательский технологический университет «МИСИС»", shortName: "МИСИС", city: "Москва", logoSystemImage: "hammer.fill", websiteURL: "https://misis.ru/applicants/admission/postgraduate/"),
         University(id: finunivId, name: "Финансовый университет при Правительстве Российской Федерации", shortName: "Финансовый университет", city: "Москва", logoSystemImage: "chart.line.uptrend.xyaxis", websiteURL: "https://www.fa.ru/"),
         University(id: ranId, name: "ФИЦ ИУ РАН / ИСП РАН", shortName: "ФИЦ ИУ РАН", city: "Москва", logoSystemImage: "brain.head.profile", websiteURL: "https://www.frccsc.ru/postgraduate/admission"),
+        University(id: sglaId, name: "Славяно-Греко-Латинская академия", shortName: "СГЛА", city: "Москва", logoSystemImage: "book.closed.fill", websiteURL: "https://sgla.ru/aspirant/"),
 
         // Санкт-Петербург
         University(id: spbuId, name: "Санкт-Петербургский государственный университет", shortName: "СПбГУ", city: "Санкт-Петербург", logoSystemImage: "building.columns.fill", websiteURL: "https://abiturient.spbu.ru/programs/aspirantura/"),
@@ -847,6 +849,228 @@ enum PhdProgramsDataProvider {
             programDescription: "Аспирантура ИСП РАН по системному программированию и теоретической информатике."
         ),
 
+        // MARK: — СГЛА (Славяно-Греко-Латинская академия)
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0000-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Искусственный интеллект и машинное обучение",
+            code: "1.2.1",
+            fieldOfStudy: "Компьютерные науки и информатика",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по ИИ и ML. Очная форма: вт/чт 18:00–21:00, сб 10:00–13:00; возможен индивидуальный график и очно-дистанционная форма. Подача — через priem@sgla.ru или Госуслуги."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0001-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Междисциплинарные исследования мозга",
+            code: "5.12.2",
+            fieldOfStudy: "Когнитивные науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по когнитивным наукам и междисциплинарным исследованиям мозга."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0002-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Генетика",
+            code: "1.5.7",
+            fieldOfStudy: "Биологические науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по генетике."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0003-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Теоретико-исторические правовые науки",
+            code: "5.1.1",
+            fieldOfStudy: "Юридические науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по теории и истории права и государства."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0004-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Частно-правовые (цивилистические) науки",
+            code: "5.1.3",
+            fieldOfStudy: "Юридические науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по цивилистическим наукам (гражданское, семейное, международное частное право)."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0005-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Международно-правовые науки",
+            code: "5.1.5",
+            fieldOfStudy: "Юридические науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по международно-правовым наукам."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0006-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Региональная и отраслевая экономика",
+            code: "5.2.3",
+            fieldOfStudy: "Экономические науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по региональной и отраслевой экономике."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0007-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Государственное управление и отраслевые политики",
+            code: "5.5.3",
+            fieldOfStudy: "Политические науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по государственному управлению и отраслевым политикам."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0008-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Общая психология, психология личности, история психологии",
+            code: "5.3.1",
+            fieldOfStudy: "Психологические науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по общей психологии, психологии личности, истории психологии."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-0009-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Медицинская психология",
+            code: "5.3.6",
+            fieldOfStudy: "Психологические науки",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по медицинской психологии."
+        ),
+
+        PhdProgram(
+            id: UUID(uuidString: "B000001A-000A-0000-0000-00000000001A")!,
+            universityId: sglaId,
+            name: "Теоретическая теология",
+            code: "5.11.1",
+            fieldOfStudy: "Теология",
+            totalPlaces: 0, budgetPlaces: 0, paidPlaces: 0,
+            tuitionPerYear: 138_000, durationYears: 3,
+            passingScoreLastYear: nil,
+            applicationStartDate: "по мере подачи", applicationEndDate: "по мере подачи",
+            examPeriod: "по мере подачи",
+            portfolioRequired: false, portfolioDetails: nil,
+            entranceExams: [
+                EntranceExam(id: UUID(), name: "Специальная дисциплина", type: .oral, details: "Дистанционный экзамен в формате видеоответов", maxScore: 100),
+            ],
+            reviews: [],
+            lastYearApplicants: nil, lastYearEnrolled: nil,
+            programDescription: "Аспирантура СГЛА по теоретической теологии. СГЛА — первый ВУЗ России, основан в 1685–1687 гг."
+        ),
+
         // =====================================================================
         // САНКТ-ПЕТЕРБУРГ
         // =====================================================================
@@ -1414,6 +1638,52 @@ enum PhdProgramsDataProvider {
             uuid("B0000006-0001-0000-0000-000000000006"): PhdProgramLinks(
                 programPageURL: "https://abit.itmo.ru/phd",
                 applicationPortalURL: "https://de.itmo.ru/abit/phd/"
+            ),
+
+            // СГЛА
+            uuid("B000001A-0000-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0001-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0002-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0003-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0004-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0005-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0006-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0007-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0008-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-0009-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
+            ),
+            uuid("B000001A-000A-0000-0000-00000000001A"): PhdProgramLinks(
+                programPageURL: "https://sgla.ru/aspirant/",
+                applicationPortalURL: "https://www.gosuslugi.ru/"
             ),
         ]
     }()
